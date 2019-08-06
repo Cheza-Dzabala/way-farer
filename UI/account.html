@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/dialogs.css">
     <link rel="stylesheet" href="./css/style.css">
     <title>Your Account</title>
 </head>
 <body>
+        <div id="confirmationModal" class="modal">
+                <div class="modal-content"> 
+                  <span class="modal-title">Are you sure you want to cancel this booking?</span>
+                </br>
+                  <div class="modal-buttons">
+                        <button class="btn btn-modal" onclick="handleClick('cancel')">
+                                Yes, I'm sure
+                        </button>
+                        <button class="btn btn-cancel" onclick="handleClick()">
+                            On second thought, No.
+                        </button>
+                  </div>
+                </div>
+              </div>
     <main>
         <div class="container">
                 <section class="showcase">
@@ -25,10 +40,11 @@
                          </div>
                  </section>
             <section class="content">
+                    <a href="./../admin.html">< Back</a>
                     <h1>Manage Profile</h1>
                     <div>
-                        <a href="password.html" class="btn btn-acc">Change Password</a>
-                        <a href="./update_acc.html" class="btn btn-acc">Update Profile Information</a>
+                        <button href="password.html" class="btn btn-acc">Change Password</button>
+                        <button href="./update_acc.html" class="btn btn-acc">Update Profile Information</button>
                     </div>
                     <h1>Your Bookings</h1>
                     <div id="user-bookings">
@@ -41,7 +57,7 @@
                                 <p id="fare"><strong>Fare: </strong>MK 12,000.00</p>
                                 <p><strong>License Number: </strong>BR 7610</p>
                                 <p><strong>Tip Status: </strong>On</p>
-                                <a class="btn btn-cancel">Cancel booking</a>
+                                <button class="btn btn-cancel" id="cancel">Cancel booking</button>
                         </div>
                         <div class="card" id="booking">
                                 <h1>Mzuzu -  Kasungu</h1>
@@ -52,7 +68,7 @@
                                 <p id="fare"><strong>Fare: </strong>MK 15,500.00</p>
                                 <p><strong>License Number: </strong>BR 7610</p>
                                 <p><strong>Tip Status: </strong>On</p>
-                                <a class="btn btn-cancel">Cancel booking</a>
+                                <button class="btn btn-cancel" >Cancel booking</button>
                         </div>
 
                     </div>
@@ -60,6 +76,7 @@
             </section>
         </div>
     </main>
+    <script src="./js/dialogs.js"></script>
     <script src="./js/elements.js"></script>
     <script src="./js/main.js"></script>
 </body>
