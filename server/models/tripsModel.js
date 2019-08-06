@@ -39,6 +39,11 @@ const findTrip = (id) => {
   return trip;
 };
 
+const findBus = (bus_license_number) => {
+  const bus = trips.find(t => t.bus_license_number === bus_license_number);
+  return bus;
+};
+
 const cancel = (trip) => {
   try {
     trip.status = false;
@@ -48,5 +53,5 @@ const cancel = (trip) => {
   }
 };
 module.exports = {
-  create, all, findTrip, cancel,
+  create, all, findTrip, cancel, findBus,
 };

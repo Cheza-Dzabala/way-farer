@@ -4,9 +4,9 @@
         "seating_capacity": 50,
         "origin": "Blantyre",
         "destination" : "Lilongwe",
-        "trip_date": "15-07-2018",
+        "trip_date": "10-15-2019",
         "fare": 55000.50,
-        "status": true,
+        "status": false,
         "bus_license_number": "LK 12021"
     },
     {
