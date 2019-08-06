@@ -25,6 +25,30 @@ input{
     padding: 0.3rem;
 }
 
+.error-message{
+    display: flex;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #b03f37;
+    border: 1px solid #a31308;
+    border-radius: .2rem;
+    color: #ffffff;
+}
+
+.error-message .message{
+    flex: 1;
+}
+
+.error-message .cancel-message {
+    flex: .1;
+    font-size: 10px;
+    justify-content: flex-end;
+}
+
+.error-message .cancel-message a:hover{
+    cursor: pointer;
+}
+
 input:focus{
     border: #308E99 1px solid;
     outline: none;
@@ -96,6 +120,7 @@ input:focus{
     font-size: .8rem;
     text-decoration: none;
     text-transform: capitalize;
+    cursor: pointer;
 }
 
 
