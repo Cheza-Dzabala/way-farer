@@ -10,19 +10,20 @@
 <body>
     <main>
         <div class="container">
-            <section class="showcase">
-                    <div class="nav-container">
-                            <div class="logo"><a href="#">Way Farer</a></div>
-                            <nav class="navigation">
-                                    <a href="./../index.html">home</a>
-                                    <a href="./../admin.html" >Admin</a>
-                                    <a href="./../account.html">account</a>
-                                    <a href="./../signup.html">sign up</a>
-                                    <a href="./../login.html">sign in</a>
-                                    <a href="#">help</a>
-                            </nav>
-                    </div>
-            </section>
+                        <section class="showcase">
+                                        <div class="nav-container">
+                                                     <div class="logo"><a href="#">Way Farer <span id="welcome"></span></a></div>
+                                                     <nav class="navigation" id="nav">
+                                                             <a href="./index.html">home</a>
+                                                         <a id="linkAccount" href="./../account.html">account</a>
+                                                         <a id="linkSignup" href="./../signup.html">sign up</a>
+                                                         <a id="linkSignin" href="./../login.html">sign in</a>
+                                                         <a id="linkLogout" onclick="logout()">logout</a>
+                                                             <a href="#">help</a>
+                                                     </nav>
+                                         </div>
+                                         
+                                 </section>
             <section class="content">
                     <div class="card auth-card">
                             <h1>Create Admin Account</h1>
@@ -37,5 +38,8 @@
             </section>
         </div>
     </main>
+    <script src="./../js/globals.js"></script>
+    <script src="./../js/elements.js"></script>
+    <script src="./../js/main.js"></script>
 </body>
 </html>
