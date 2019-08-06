@@ -32,13 +32,13 @@ const endpoint = '/api/v1/bookings';
 
 const validAcc = {
   email: 'janeyjanejane@gmail.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
 };
 
 
 const nonAdmin = {
   email: 'cheza@gmail.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
 };
 
 describe('Booking Tests', () => {

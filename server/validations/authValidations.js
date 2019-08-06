@@ -14,8 +14,8 @@ const validateSignup = (data) => {
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
     password: Joi.string().trim().regex(/[0-9]$/).regex(/[a-zA-Z0-9]$/)
       .required(),
-    first_name: Joi.string().trim().regex(/[a-zA-Z]$/).required(),
-    last_name: Joi.string().trim().regex(/[a-zA-Z]$/).required(),
+    first_name: Joi.string().trim().regex(/^[a-zA-Z]{3,10}$/).required(),
+    last_name: Joi.string().trim().regex(/^[a-zA-Z]{3,10}$/).required(),
   });
 
   return Joi.validate(data, schema);

@@ -2,7 +2,7 @@
   {
     "id": 1,
     "email": "cheza@gmail.com",
-    "password": "$2b$08$E26C4jPh.KwTaJV/p4hK.uM2VoU2x1prnPsoSCvEHj.3kfn//Rczi",
+    "password": "$2b$08$h3cKwnDNnQM1Vtfoln/TPO45zm1PXOFQ.Ln7turh1QCdu27Hn9VmK",
     "first_name": "Cheza",
     "last_name": "Dzabala",
     "is_admin": false
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "email": "realagentsmith@gmail.com",
-    "password": "$2b$08$E26C4jPh.KwTaJV/p4hK.uM2VoU2x1prnPsoSCvEHj.3kfn//Rczi",
+    "password": "$2b$08$h3cKwnDNnQM1Vtfoln/TPO45zm1PXOFQ.Ln7turh1QCdu27Hn9VmK",
     "first_name": "John",
     "last_name": "Smith",
     "is_admin": false
@@ -18,7 +18,7 @@
   {
     "id": 3,
     "email": "janeyjanejane@gmail.com",
-    "password": "$2b$08$E26C4jPh.KwTaJV/p4hK.uM2VoU2x1prnPsoSCvEHj.3kfn//Rczi",
+    "password": "$2b$08$h3cKwnDNnQM1Vtfoln/TPO45zm1PXOFQ.Ln7turh1QCdu27Hn9VmK",
     "first_name": "Jane",
     "last_name": "Doe",
     "is_admin": true
@@ -26,7 +26,7 @@
   {
     "id": 4,
     "email": "lukeskywalker@gmail.com",
-    "password": "$2b$08$E26C4jPh.KwTaJV/p4hK.uM2VoU2x1prnPsoSCvEHj.3kfn//Rczi",
+    "password": "$2b$08$h3cKwnDNnQM1Vtfoln/TPO45zm1PXOFQ.Ln7turh1QCdu27Hn9VmK",
     "first_name": "Mark",
     "last_name": "Hamil",
     "is_admin": true
@@ -34,7 +34,7 @@
   {
     "id": 5,
     "email": "iamsparrow@gmail.com",
-    "password": "$2b$08$E26C4jPh.KwTaJV/p4hK.uM2VoU2x1prnPsoSCvEHj.3kfn//Rczi",
+    "password": "$2b$08$h3cKwnDNnQM1Vtfoln/TPO45zm1PXOFQ.Ln7turh1QCdu27Hn9VmK",
     "first_name": "Jack",
     "last_name": "Sparrow",
     "is_admin": false

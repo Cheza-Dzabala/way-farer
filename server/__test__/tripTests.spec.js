@@ -9,12 +9,12 @@ chai.use(chaiHttp);
 const endpoint = '/api/v1/trips';
 const validAcc = {
   email: 'janeyjanejane@gmail.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
 };
 
 const nonAdmin = {
   email: 'cheza@gmail.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
 };
 
 
