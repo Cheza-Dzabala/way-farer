@@ -17,10 +17,12 @@
                    </div>
                     <div class="card auth-card">
                         <h1>Login</h1>
-                        <form action="#" class="auth-form">
-                                <input type="email" name="email" placeholder="Email...">
-                                <input type="password" name="password" placeholder="Password...">
-                                <a href="./index.html" class="btn">Login</a>
+                        <form action="#" class="auth-form" id="login-form">
+                                <div id="authMessageContainer">
+                                </div>
+                                <input type="email" name="email" id="email" placeholder="Email...">
+                                <input type="password" name="password" id="password" placeholder="Password...">
+                                <button type="submit" href="#"  class="btn">Login</button>
                         </form>
                         <div class="form-links">
                             <a href="./recover_password.html" class="form-link">Forgot Password</a>
@@ -31,5 +33,10 @@
             </div>
         </div>
     </main>
+    <script src="./js/elements.js"></script>
+    <script src="./js/classes.js"></script>
+    <script src="./js/data/users.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script src="./js/auth.js"></script>
 </body>
 </html>

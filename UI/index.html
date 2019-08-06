@@ -12,12 +12,14 @@
         <div class="container">
             <section class="showcase">
                    <div class="nav-container">
-                                <div class="logo"><a href="#">Way Farer</a></div>
-                                <nav class="navigation">
+                                <div class="logo"><a href="#">Way Farer <span id="welcome"></span></a></div>
+                                <nav class="navigation" id="nav">
                                         <a href="./index.html">home</a>
-                                    <a href="./account.html">account</a>
-                                    <a href="./signup.html">sign up</a>
-                                    <a href="./login.html">sign in</a>
+                                    <a id="linkAccount" href="./account.html">account</a>
+                                    <a id="linkSignup" href="./signup.html">sign up</a>
+                                    <a id="linkSignin" href="./login.html">sign in</a>
+                                    <a id="linkAdmin" href="./admin.html">Admin</a>
+                                    <a id="linkLogout" onclick="logout()">logout</a>
                                         <a href="#">help</a>
                                 </nav>
                     </div>
@@ -33,7 +35,7 @@
             </section>
             <section class="trips">
                     <div class="section-title">
-                       <h2>Blantyre Trips</h2> 
+                       <h2>Blantyre Trips</h2>
                     </div>
                     <div class="trip-section">
                     <div class="trip">
@@ -219,5 +221,7 @@
             </section>
         </div>
     </main>
+    <script src="./js/elements.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
