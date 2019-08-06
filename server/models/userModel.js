@@ -25,10 +25,15 @@ class User {
     };
   }
 }
-const hashIt = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 
+const hashIt = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 const findUser = (email) => {
   const user = users.find(u => u.email === email);
+  return user;
+};
+
+const findUserById = (id) => {
+  const user = users.find(u => u.id === parseInt(id));
   return user;
 };
 
@@ -41,6 +46,7 @@ const signin = (email, password) => {
   return null;
 };
 
+
 const signup = (data) => {
   const id = helpers.generateId(users);
   data.id = id;
@@ -52,6 +58,37 @@ const signup = (data) => {
   return user.safe();
 };
 
+const allUsers = () => {
+  const payload = [];
+  users.forEach((element) => {
+    const user = new User(element);
+    payload.push(user.safe());
+  });
+  return payload;
+};
+
+const allAdmins = () => {
+  const admins = [];
+  users.forEach((user) => {
+    if (user.is_admin) {
+      const obj = new User(user);
+      admins.push(obj.safe());
+    }
+  });
+  return admins;
+};
+
+const createAdmin = (data) => {
+  const id = helpers.generateId(users);
+  data.id = id;
+  data.is_admin = true;
+  const password = helpers.generatePassword(data.password);
+  const hash = hashIt(password);
+  data.password = hash;
+  const user = new User(data);
+  users.push(user);
+  return user.safe();
+};
 module.exports = {
-  signin, signup, findUser,
+  signin, signup, findUser, findUserById, allUsers, allAdmins, createAdmin,
 };
