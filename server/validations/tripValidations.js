@@ -2,10 +2,11 @@ import Joi from '@hapi/joi';
 
 const validateNewTrip = (data) => {
   const schema = Joi.object().keys({
-    origin: Joi.string().trim().required(),
-    destination: Joi.string().trim().required(),
-    fare: Joi.number().required(),
-    seating_capacity: Joi.number().required(),
+    origin: Joi.string().trim().regex(/^[a-zA-Z]{3,15}$/).required(),
+    destination: Joi.string().trim().regex(/^[a-zA-Z]{3,15}$/).required(),
+    fare: Joi.number().positive().max(500000).required(),
+    seating_capacity: Joi.number().integer().positive().max(100)
+      .required(),
     trip_date: Joi.date().min('now').required(),
     bus_license_number: Joi.string().required(),
   });

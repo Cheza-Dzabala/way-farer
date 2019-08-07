@@ -12,9 +12,10 @@ const vailidateSignin = (data) => {
 const validateSignup = (data) => {
   const schema = Joi.object().keys({
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
-    password: Joi.string().required(),
-    last_name: Joi.string().trim().required(),
-    first_name: Joi.string().trim().required(),
+    password: Joi.string().trim().regex(/[0-9]$/).regex(/[a-zA-Z0-9]$/)
+      .required(),
+    first_name: Joi.string().trim().regex(/^[a-zA-Z]{3,10}$/).required(),
+    last_name: Joi.string().trim().regex(/^[a-zA-Z]{3,10}$/).required(),
   });
 
   return Joi.validate(data, schema);

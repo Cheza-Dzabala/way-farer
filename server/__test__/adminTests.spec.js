@@ -9,31 +9,31 @@ const endpoint = '/api/v1/admins';
 
 const adminAcc = {
   email: 'janeyjanejane@gmail.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
 };
 
 
 const nonAdminAcc = {
   email: 'cheza@gmail.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
 };
 
 const newAdminAcc = {
   email: 'obiwankenobi@myacc.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
   first_name: 'Cheza',
   last_name: 'Dzabala',
 };
 
 const existingAdmin = {
   email: 'lukeskywalker@gmail.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
   first_name: 'Cheza',
   last_name: 'Dzabala',
 };
 
 const missingEmail = {
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
   first_name: 'Cheza',
   last_name: 'Dzabala',
 };
@@ -46,13 +46,13 @@ const missingPassword = {
 
 const missingFirstName = {
   email: 'demoadmin@myacc.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
   last_name: 'Dzabala',
 };
 
 const missingLastName = {
   email: 'demoadmin@myacc.com',
-  password: 'Runfree8418_!*',
+  password: 'Runfree8',
   first_name: 'Cheza',
 };
 

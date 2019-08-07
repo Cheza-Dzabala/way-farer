@@ -12,20 +12,20 @@ describe('Sign Up Feature', () => {
 
   const existentEmailAcc = {
     email: 'dzabalamacheza@gmail.com',
-    password: 'Runfree8418_!*',
+    password: 'Runfree8',
     first_name: 'Cheza',
     last_name: 'Dzabala',
   };
 
   const validAcc = {
     email: 'demo@myacc.com',
-    password: 'Runfree8418_!*',
+    password: 'Runfree8',
     first_name: 'Cheza',
     last_name: 'Dzabala',
   };
 
   const missingEmail = {
-    password: 'Runfree8418_!*',
+    password: 'Runfree8',
     first_name: 'Cheza',
     last_name: 'Dzabala',
   };
@@ -39,14 +39,35 @@ describe('Sign Up Feature', () => {
 
   const missingFirstName = {
     email: 'dzabalamacheza1@myacc.com',
-    password: 'Runfree8418_!*',
+    password: 'Runfree8',
     last_name: 'Dzabala',
   };
 
   const missingLastName = {
     email: 'dzabalamacheza2@myacc.com',
-    password: 'Runfree8418_!*',
+    password: 'Runfree8',
     first_name: 'Cheza',
+  };
+
+  const lastNameSpecialCharacters = {
+    email: 'user@myguy.com',
+    password: 'Hello22',
+    first_name: 'User',
+    last_name: 'foo-baz',
+  };
+
+  const firstNameSpecialCharacters = {
+    email: 'user@myguy.com',
+    password: 'Hello4',
+    first_name: 'MYGUY@',
+    last_name: 'foobaz',
+  };
+
+  const nonAlphaPassword = {
+    email: 'user@myguy.com',
+    password: 'Hello',
+    first_name: 'MYGUY',
+    last_name: 'foobaz',
   };
 
 
@@ -142,6 +163,46 @@ describe('Sign Up Feature', () => {
         expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
         expect(body.data).to.be.have.property('message', '"last_name" is required');
+        done();
+      });
+  });
+
+  it('Should Reject A New User account if First Name has special characters provided', (done) => {
+    chai.request(app)
+      .post(endpoint)
+      .send(firstNameSpecialCharacters)
+      .end((err, res) => {
+        const { body } = res;
+        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
+        expect(body.data).to.be.have.property('message');
+        done();
+      });
+  });
+
+
+  it('Should Reject A New User account if Last Name has special characters provided', (done) => {
+    chai.request(app)
+      .post(endpoint)
+      .send(lastNameSpecialCharacters)
+      .end((err, res) => {
+        const { body } = res;
+        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
+        expect(body.data).to.be.have.property('message');
+        done();
+      });
+  });
+
+  it('Should Reject A New User account if password is not alphanumeric', (done) => {
+    chai.request(app)
+      .post(endpoint)
+      .send(nonAlphaPassword)
+      .end((err, res) => {
+        const { body } = res;
+        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
+        expect(body.data).to.be.have.property('message');
         done();
       });
   });

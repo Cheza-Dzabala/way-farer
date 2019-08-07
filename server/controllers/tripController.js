@@ -9,6 +9,17 @@ const createTrip = (req, res) => {
       data: { message: error.details[0].message },
     });
   }
+
+  const bus = tripModel.findBus(req.bus_license_number);
+  if (bus) {
+    console.log(bus);
+    if (bus.trip_date === req.trip_date) {
+      return res.status(209).json({
+        status: 'unsuccessful',
+        data: { message: 'Trip already scheduled on this date' },
+      });
+    }
+  }
   const trip = tripModel.create(req);
   if (trip) {
     return res.status(201).json({
@@ -32,6 +43,22 @@ const allTrips = (req, res) => {
 
 const cancelTrip = (id, res) => {
   const trip = tripModel.findTrip(id);
+  if (!trip) {
+    return res.status(400).json({
+      status: 'unsuccessful',
+      data: {
+        message: 'Trip does not exist',
+      },
+    });
+  }
+  if (!trip.status) {
+    return res.status(409).json({
+      status: 'unsuccessful',
+      data: {
+        message: 'Trip already cancelled',
+      },
+    });
+  }
   if (!trip) {
     return res.status(404).json({
       status: 'Resource not found',
