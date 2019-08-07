@@ -4,7 +4,6 @@ import tripsModel from '../models/tripsModel';
 
 const validateBooking = (data) => {
   const schema = Joi.object().keys({
-    user_id: Joi.number().required(),
     trip_id: Joi.number().required(),
     seat_number: Joi.string().required(),
   });
@@ -12,8 +11,8 @@ const validateBooking = (data) => {
   return Joi.validate(data, schema);
 };
 
-const validateRelationships = (data) => {
-  const user = userModel.findUserById(data.user_id);
+const validateRelationships = (data, userObj) => {
+  const user = userModel.findUserById(userObj.id);
   const trip = tripsModel.findTrip(data.trip_id);
 
   return { user, trip };

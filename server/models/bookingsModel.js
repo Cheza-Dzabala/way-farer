@@ -23,6 +23,7 @@ class Bookings {
       allocated_seat: this.seat_number,
       bus_license_number: trip.bus_license_number,
       trip_date: trip.trip_date,
+      user_id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
       user_email: user.email,
@@ -52,9 +53,10 @@ const userBookings = (id) => {
   return bookingsArray;
 };
 
-const createBooking = (data) => {
+const createBooking = (data, user) => {
   data.id = helpers.generateId(bookings);
   data.created_on = Date.now();
+  data.user_id = user.id;
   const booking = new Bookings(data);
   bookings.push(booking);
   return booking.bookingModel();
