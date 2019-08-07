@@ -31,7 +31,9 @@
   "scripts": {
     "start": "babel-watch server.js",
     "test": "nyc --reporter=lcov mocha --require @babel/polyfill --require @babel/register __test__/**/**spec**",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "deploy": "cd ../ && git subtree push --prefix server/ heroku/wayfarer55 master"
+
   },
   "author": "Macheza Dzabala",
   "license": "ISC"
