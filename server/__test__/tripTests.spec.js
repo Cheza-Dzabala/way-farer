@@ -304,3 +304,30 @@ describe('Trip Tests', () => {
     });
   });
 });
+describe('Trip "Get" requests', () => {
+  it('Should return a trip if exists', (done) => {
+    chai.request(app)
+      .get(`${endpoint}/1`)
+      .end((err, res) => {
+        const { body, status } = res;
+        const { data } = body;
+        expect(data).to.be.an('object', 'Wrong Data type returned');
+        expect(status).to.be.equal(200, 'Wrong status returned');
+        done();
+      });
+  });
+
+
+  it('Should not return a trip if it doesn\'t  exists', (done) => {
+    chai.request(app)
+      .get(`${endpoint}/12`)
+      .end((err, res) => {
+        const { body, status } = res;
+        const { data } = body;
+        expect(body.status).to.be.equal('unsuccessful', 'Wrong status being returned');
+        expect(data).to.be.have.property('message', 'Trip not found');
+        expect(status).to.be.equal(404, 'Wrong status returned');
+        done();
+      });
+  });
+});

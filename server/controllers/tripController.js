@@ -83,6 +83,20 @@ const cancelTrip = (id, res) => {
     },
   }).end();
 };
+
+const getTrip = (id, res) => {
+  const trip = tripModel.findTrip(id);
+  if (trip) {
+    return res.status(200).json({
+      status: 'success',
+      data: trip,
+    });
+  }
+  return res.status(404).json({
+    status: 'unsuccessful',
+    data: { message: 'Trip not found' },
+  });
+};
 module.exports = {
-  createTrip, allTrips, cancelTrip,
+  createTrip, allTrips, cancelTrip, getTrip,
 };

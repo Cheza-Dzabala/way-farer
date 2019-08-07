@@ -11,6 +11,7 @@ const router = Router();
 router.post('/', authorization.setToken, authorization.verifyToken, adminCheck, (req, res) => tripController.createTrip(req.body, res));
 
 router.get('/', (req, res) => tripController.allTrips(req.body, res));
+router.get('/:id', (req, res) => tripController.getTrip(req.param('id'), res));
 
 router.patch('/:id/cancel', authorization.setToken, authorization.verifyToken, adminCheck, (req, res) => tripController.cancelTrip(req.param('id'), res));
 module.exports = router;
