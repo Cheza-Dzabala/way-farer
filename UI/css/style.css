@@ -66,8 +66,68 @@ input:focus{
     text-decoration: none;
 }
 
+
+.delete {
+    color: #AE0000;
+}
+.action-holder{
+    display: flex;
+    flex-direction: column;
+}
+.btn-small{
+    flex: 1
+}
 .btn-cancel{
     background-color: #AE0000;
+}
+
+.normal-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.back-row{
+    margin: 0 2rem;
+    justify-content: space-evenly;
+}
+.seats{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.seats .seat {
+    margin: .5rem;
+}
+
+.seat img{
+    width: 30px;
+}
+.seat-lettering {
+    padding: 1rem;
+}
+.seat-lettering span{
+    margin: 0 .5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.row-upper-spacing{
+   margin: 4.5rem 0;
+}
+.seat-column{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.seats-right{
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .modal-buttons{
@@ -366,6 +426,10 @@ Admin Pages
 
 
     @media(min-width: 768px){
+
+        .seat img{
+            width: 50px;
+        }
         /*
             Navigation
         */
@@ -536,6 +600,13 @@ Admin Pages
             flex: .20;
         }
 
+        .btn-small{
+            flex: 1
+        }
+        
+        .action-holder{
+            flex-direction: row;
+        }
     }
 
     @media(min-width: 1024){
