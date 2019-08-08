@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-
+import dotenv from 'dotenv';
 
 import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
@@ -8,6 +8,8 @@ import tripRoutes from './routes/tripRoutes';
 import bookingRoutes from './routes/bookingRoutes';
 
 const app = express();
+
+dotenv.config();
 
 app.use(morgan('dev'));
 app.use(express.json());

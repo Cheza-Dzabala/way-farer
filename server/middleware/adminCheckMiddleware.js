@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel';
 
 export default ((req, res, next) => {
-  jwt.verify(req.token, 'noonewilleverguessthiskey', (err, decoded) => {
+  jwt.verify(req.token, process.env.SECRET_KEY, (err, decoded) => {
     const { user: { id } } = decoded;
     const user = userModel.findUserById(id);
     if (user.is_admin === false) {
