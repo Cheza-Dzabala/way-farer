@@ -9,6 +9,7 @@ import bookingRoutes from './routes/bookingRoutes';
 
 const app = express();
 dotenv.config();
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -146,8 +146,6 @@ This is where the admin can view trips scheduled by user.
 
 The server application is built NodeJs & Express.
 
-### Code Coverage Results
-
 ## Routes
 
 Belowe are the endpoints that will facilitate the communication with the UI of the application.
