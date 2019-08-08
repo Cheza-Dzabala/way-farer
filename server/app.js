@@ -8,7 +8,6 @@ import tripRoutes from './routes/tripRoutes';
 import bookingRoutes from './routes/bookingRoutes';
 
 const app = express();
-
 dotenv.config();
 
 app.use(morgan('dev'));
@@ -22,6 +21,9 @@ app.use(`/api/${version}/trips/`, tripRoutes);
 app.use(`/api/${version}/bookings/`, bookingRoutes);
 app.use(`/api/${version}/admins`, adminRoutes);
 
+app.get('/api/v1/docs', (req, res) => {
+  res.sendFile(`${__dirname}/docs/docs.md.html`);
+});
 // Status 404 (Error) middleware
 app.use('*', (req, res) => {
   res.status(404).json({
