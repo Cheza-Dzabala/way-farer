@@ -15,6 +15,7 @@
     "bcrypt": "^3.0.6",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1"
@@ -33,7 +34,6 @@
     "test": "nyc --reporter=lcov mocha --require @babel/polyfill --require @babel/register __test__/**/**spec**",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "deploy": "cd ../ && git subtree push --prefix server/ heroku/wayfarer55 master"
-
   },
   "author": "Macheza Dzabala",
   "license": "ISC"
