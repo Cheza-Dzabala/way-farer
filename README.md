@@ -2,16 +2,6 @@
 
 Welcome to way  farer, your premium solution for bus ticketing. This product is built with HTML, CSS & Javascript in the front end as well as being accompanied by a NodeJs server in the back end.
 
-
-[![Build Status](https://travis-ci.org/Cheza-Dzabala/way-farer.svg?branch=develop)](https://travis-ci.org/Cheza-Dzabala/way-farer)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ed267fe9629ea8a240ed/test_coverage)](https://codeclimate.com/github/Cheza-Dzabala/wayfarer-server/test_coverage)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/d65680d77a4ef3c2d377/maintainability)](https://codeclimate.com/github/Cheza-Dzabala/way-farer/maintainability)
-
-[![Coverage Status](https://coveralls.io/repos/github/Cheza-Dzabala/way-farer/badge.svg?branch=develop)](https://coveralls.io/github/Cheza-Dzabala/way-farer?branch=develop)
-
-
 # Directory & File Structure
 
 ```
@@ -146,7 +136,23 @@ This is where the admin can view trips scheduled by user.
 
 The server application is built NodeJs & Express.
 
+## Coverage
+
+Auto coverage is built in through Travis CI, with coverage reporting from Coveralls & Code Climate. 
+
 ### Code Coverage Results
+
+#### Travis CI Build Status
+[![Build Status](https://travis-ci.org/Cheza-Dzabala/way-farer.svg?branch=develop)](https://travis-ci.org/Cheza-Dzabala/way-farer)
+
+#### Codeclimate Test Coverage
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ed267fe9629ea8a240ed/test_coverage)](https://codeclimate.com/github/Cheza-Dzabala/wayfarer-server/test_coverage)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/d65680d77a4ef3c2d377/maintainability)](https://codeclimate.com/github/Cheza-Dzabala/way-farer/maintainability)
+
+#### Coveralls
+[![Coverage Status](https://coveralls.io/repos/github/Cheza-Dzabala/way-farer/badge.svg?branch=develop)](https://coveralls.io/github/Cheza-Dzabala/way-farer?branch=develop)
 
 ## Routes
 
@@ -156,7 +162,6 @@ Belowe are the endpoints that will facilitate the communication with the UI of t
 
 These are the authentication routes. They will always return a token.
 
-Create a .env file in the ` / server` directory. Copy the key from the `.env.example` file and append your own secret key to the file.
 #### Sign Up
 
 ###### Sign Up To Way Farer
