@@ -130,7 +130,7 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(400);
-          expect(body).to.have.property('status', 'Bad Request', 'trip Not found status not being returned to the user');
+          expect(body).to.have.property('status', 'unsuccessful', 'trip Not found status not being returned to the user');
           expect(body.data).to.have.property('message', '"trip_id" is required', 'Booking not being rejected with invalid data');
           done();
         });
@@ -144,7 +144,7 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(400);
-          expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not being returned to the user');
+          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not being returned to the user');
           expect(body.data).to.have.property('message', '"seat_number" is required', 'Booking not being rejected with invalid data');
           done();
         });

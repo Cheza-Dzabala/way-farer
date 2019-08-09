@@ -123,7 +123,7 @@ describe('Admin Routes', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(409, 'Incorrect Status Code Being Returned');
-          expect(body).to.have.property('status', 'Forbidden', 'Wrong status message in the body is returned');
+          expect(body).to.have.property('status', 'unsuccessful', 'Wrong status message in the body is returned');
           expect(body.data).to.have.property('message', 'Email already exists on the system');
           done();
         });
@@ -136,7 +136,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
           expect(body.data).to.be.have.property('message', '"email" is required');
           done();
@@ -150,7 +150,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
           expect(body.data).to.be.have.property('message', '"password" is required');
           done();
@@ -164,7 +164,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
           expect(body.data).to.be.have.property('message', '"first_name" is required');
           done();
@@ -177,7 +177,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
           expect(body.data).to.be.have.property('message', '"last_name" is required');
           done();

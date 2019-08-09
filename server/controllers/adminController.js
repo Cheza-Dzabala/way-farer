@@ -14,14 +14,14 @@ const create = ({ body }, res) => {
 
   if (error) {
     return res.status(400).json({
-      status: 'Bad Request',
+      status: 'unsuccessful',
       data: { message: error.details[0].message },
     });
   }
   const user = userModel.findUser(body.email);
   if (user) {
     return res.status(409).json({
-      status: 'Forbidden',
+      status: 'unsuccessful',
       data: {
         message: 'Email already exists on the system',
       },
