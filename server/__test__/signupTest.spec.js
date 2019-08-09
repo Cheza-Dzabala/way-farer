@@ -121,7 +121,7 @@ describe('Sign Up Feature', () => {
       .send(missingEmail)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
         expect(body.data).to.be.have.property('message', '"email" is required');
         done();
@@ -134,7 +134,7 @@ describe('Sign Up Feature', () => {
       .send(missingPassword)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
         expect(body.data).to.be.have.property('message', '"password" is required');
         done();
@@ -147,7 +147,7 @@ describe('Sign Up Feature', () => {
       .send(missingFirstName)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
         expect(body.data).to.be.have.property('message', '"first_name" is required');
         done();
@@ -160,7 +160,7 @@ describe('Sign Up Feature', () => {
       .send(missingLastName)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
         expect(body.data).to.be.have.property('message', '"last_name" is required');
         done();
@@ -173,7 +173,7 @@ describe('Sign Up Feature', () => {
       .send(firstNameSpecialCharacters)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
         expect(body.data).to.be.have.property('message');
         done();
@@ -187,7 +187,7 @@ describe('Sign Up Feature', () => {
       .send(lastNameSpecialCharacters)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
         expect(body.data).to.be.have.property('message');
         done();
@@ -200,7 +200,7 @@ describe('Sign Up Feature', () => {
       .send(nonAlphaPassword)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'Bad Request', 'Bad Request status not returned');
+        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
         expect(body.data).to.be.have.property('message');
         done();

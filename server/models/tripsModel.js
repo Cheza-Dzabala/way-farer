@@ -5,7 +5,7 @@ import helper from '../helpers/helpers';
 
 class Trips {
   constructor({
-    id, origin, destination, fare, seating_capacity, trip_date, status, bus_license_number,
+    id, status, origin, destination, fare, seating_capacity, trip_date, bus_license_number,
   }) {
     this.id = id;
     this.fare = fare;
@@ -40,8 +40,11 @@ const findTrip = (id) => {
 };
 
 const findBus = (bus_license_number) => {
-  const bus = trips.find(t => t.bus_license_number === bus_license_number);
-  return bus;
+  const busses = [];
+  trips.forEach((bus) => {
+    if (bus.bus_license_number === bus_license_number) { busses.push(bus); }
+  });
+  return busses;
 };
 
 const cancel = (trip) => {

@@ -274,6 +274,40 @@ describe('Trip Tests', () => {
           done();
         });
     });
+
+
+    it('Should display single trip', (done) => {
+      chai.request(app)
+        .get(`${endpoint}/2`)
+        .end((err, res) => {
+          const { status, body } = res;
+          expect(status).to.be.equal(200, 'Incorrect status being returned');
+          expect(body.data).to.be.a('object');
+          done();
+        });
+    });
+
+    it('Should return trip not found with non existent trip', (done) => {
+      chai.request(app)
+        .get(`${endpoint}/55`)
+        .end((err, res) => {
+          const { status, body } = res;
+          expect(status).to.be.equal(404, 'Incorrect status being returned');
+          expect(body.data.message).to.be.equal('Trip not found', 'Correct message not returned');
+          done();
+        });
+    });
+
+    it('Should return trip not found with invalid character', (done) => {
+      chai.request(app)
+        .get(`${endpoint}/@`)
+        .end((err, res) => {
+          const { status, body } = res;
+          expect(status).to.be.equal(404, 'Incorrect status being returned');
+          expect(body.data.message).to.be.equal('Trip not found', 'Correct message not returned');
+          done();
+        });
+    });
   });
 
   describe('Trip "PATCH" Routes', () => {

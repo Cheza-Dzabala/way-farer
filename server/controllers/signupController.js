@@ -18,7 +18,7 @@ const signup = (req, res) => {
   }
   if (error) {
     return res.status(400).json({
-      status: 'Bad Request',
+      status: 'unsuccessful',
       data: {
         message: error.details[0].message,
       },

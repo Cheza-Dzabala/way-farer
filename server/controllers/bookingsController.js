@@ -2,6 +2,7 @@
 import bookingsModel from '../models/bookingsModel';
 import bookingsValidations from '../validations/bookingValidations';
 import typeCheck from '../middleware/userTypeMiddleware';
+import userModel from '../models/userModel';
 
 const getBookings = (req, res) => {
   const userId = typeCheck.verifyUser(req);
@@ -23,25 +24,26 @@ const getBookings = (req, res) => {
 
 const createBooking = (req, res) => {
   const user = typeCheck.getUser(req);
+  const userObject = userModel.findUserById(user.id);
   const { body } = req;
   const { error } = bookingsValidations.validateBooking(body);
   let flag = false;
 
   if (error) {
     return res.status(400).json({
-      status: 'Bad Request',
+      status: 'unsuccessful',
       data: { message: error.details[0].message },
     });
   }
   const { trip } = bookingsValidations.validateRelationships(body, user);
-  if (!user) {
+  if (!userObject) {
     return res.status(404).json({
-      status: 'User not found',
+      status: 'unsuccessful',
       data: { message: 'No user found with this ID' },
     });
   } if (!trip) {
     return res.status(404).json({
-      status: 'Trip not found',
+      status: 'unsuccessful',
       data: { message: 'No trip found with this ID' },
     });
   }
@@ -77,8 +79,8 @@ const deleteBooking = (req, res) => {
       data: { message: details },
     });
   }
-  return res.status(403).json({
-    status: 'Forbidden',
+  return res.status(404).json({
+    status: 'unsuccessful',
     data: { message: 'Booking doesn\'t exist on the system' },
   });
 };
