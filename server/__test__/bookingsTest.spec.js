@@ -12,6 +12,12 @@ const validBooking = {
   seat_number: '3a',
 };
 
+const validBooking2 = {
+  trip_id: 1,
+  seat_number: '3b',
+};
+
+
 const notTripId = {
   seat_number: '3a',
 };
@@ -35,6 +41,7 @@ const nonAdmin = {
 
 describe('Booking Tests', () => {
   let token = false;
+  let nonAdminToken;
   before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
@@ -43,9 +50,18 @@ describe('Booking Tests', () => {
         const { body } = res;
         token = body.data.token;
         expect(body.data.token);
+      });
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(nonAdmin)
+      .end((err, res) => {
+        const { body } = res;
+        nonAdminToken = body.data.token;
+        expect(body.data.token);
         done();
       });
   });
+
   describe('Test "Get" Routes for bookings', () => {
     it('Should check if enpoint exists', (done) => {
       chai.request(app)
@@ -70,29 +86,14 @@ describe('Booking Tests', () => {
           done();
         });
     });
-
-    describe('Login with non admin acc', () => {
-      let nonAdminToken = false;
-      beforeEach((done) => {
-        chai.request(app)
-          .post('/api/v1/auth/signin')
-          .send(nonAdmin)
-          .end((err, res) => {
-            const { body } = res;
-            nonAdminToken = body.data.token;
-            expect(body.data.token);
-            done();
-          });
-      });
-    });
   });
 
   describe('Test "POST" Routes for bookings (Creating Bookings)', () => {
-    it('Should create a new boooking with valid data', (done) => {
+    it('Should create a new booking with valid data', (done) => {
       chai.request(app)
         .post(endpoint)
-        .set('token', `bearer ${token}`)
-        .send(validBooking)
+        .set('token', `bearer ${nonAdminToken}`)
+        .send(validBooking2)
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(201);
@@ -107,6 +108,23 @@ describe('Booking Tests', () => {
           done();
         });
     });
+
+
+    it('Should reject new booking if the seat is already allocated', (done) => {
+      chai.request(app)
+        .post(endpoint)
+        .set('token', `bearer ${token}`)
+        .send(validBooking2)
+        .end((err, res) => {
+          const { body } = res;
+          expect(res.status).to.be.equal(409);
+          expect(body).to.have.property('data');
+          expect(body).to.have.property('status', 'unsuccessful', 'Wrong data message being passed');
+          expect(body.data).to.have.property('message', 'This seat is unavailable', 'Wrong message displayed');
+          done();
+        });
+    });
+
 
     it('Should reject request if token is not present in header', (done) => {
       chai.request(app)
