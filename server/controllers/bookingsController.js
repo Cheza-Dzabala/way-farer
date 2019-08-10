@@ -50,8 +50,7 @@ const createBooking = (req, res) => {
 
   const bookings = bookingsModel.allBookings();
   bookings.forEach((booking) => {
-    const { email } = user;
-    if (booking.user_email === email && booking.trip_date === trip.trip_date) {
+    if (booking.allocated_seat === body.seat_number) {
       flag = true;
     }
   });
@@ -59,7 +58,7 @@ const createBooking = (req, res) => {
   if (flag === true) {
     return res.status(409).json({
       status: 'unsuccessful',
-      data: { message: 'Booking has already been made' },
+      data: { message: 'This seat is unavailable' },
     });
   }
 
