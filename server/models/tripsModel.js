@@ -48,12 +48,8 @@ const findBus = (bus_license_number) => {
 };
 
 const cancel = (trip) => {
-  try {
-    trip.status = false;
-    return { status: 'success', details: null };
-  } catch (error) {
-    return { status: 'error', details: error.message };
-  }
+  trip.status = false;
+  return { status: 'success' };
 };
 module.exports = {
   create, all, findTrip, cancel, findBus,
