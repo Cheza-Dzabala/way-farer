@@ -26,10 +26,20 @@
                     <aside class="card search-card">
                         <h1>Filter through trips</h1>
                         <form action="" class="auth-form">
-                            <input type="text" name="origin" id="origin" placeholder="Origin...">
-                            <input type="text" name="destination" id="destination" placeholder="Destination...">
+                            <select name="origin" class="filter-trip-select">
+                                <option value=""> Please select your origin </option>
+                                <option value=""> Blantyre </option>
+                                <option value=""> Lilongwe </option>
+                                <option value=""> Mzuzu </option>
+                            </select>
+                            <select name="destination" id="destination" class="filter-trip-select">
+                                <option value="">Please select your destination</option>
+                                <option value=""> Thyolo </option>
+                                <option value=""> Bangwe </option>
+                                <option value=""> Chintheche </option>
+                            </select>
                             <input type="date" name="date" id="date">
-                            <a href="#" class="btn">Filter</a>
+                            <button href="#" class="btn">Filter</button>
                         </form>
                     </aside>
             </section>
