@@ -154,7 +154,7 @@ describe('Trip Tests', () => {
           expect(res.status).to.be.equal(209);
           expect(status).to.be.equal('unsuccessful');
           expect(status).to.be.equal('unsuccessful', 'Wrong Status message returned');
-          expect(data).to.have.property('message', 'Trip already scheduled on this date', 'Wrong message returned');
+          expect(data).to.have.property('message', 'This bus is already booked on a trip on this date', 'Wrong message returned');
           done();
         });
     });

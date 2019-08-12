@@ -7,6 +7,7 @@ const getUser = (req) => {
   // Get the token from the new bearer token array
   const bearerToken = bearer[1];
   const { user } = jwt.decode(bearerToken, process.env.SECRET_KEY);
+
   return user;
 };
 

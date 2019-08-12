@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const version = 'v1';
 
+
 app.use(`/api/${version}/auth/`, authRoutes);
 app.use(`/api/${version}/trips/`, tripRoutes);
 app.use(`/api/${version}/bookings/`, bookingRoutes);

@@ -53,10 +53,9 @@ const userBookings = (id) => {
   return bookingsArray;
 };
 
-const createBooking = (data, user) => {
+const createBooking = (data) => {
   data.id = helpers.generateId(bookings);
   data.created_on = Date.now();
-  data.user_id = user.id;
   const booking = new Bookings(data);
   bookings.push(booking);
   return booking.bookingModel();
