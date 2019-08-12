@@ -7,6 +7,7 @@ body{
     height: auto;
 }
 
+
 /* Global Styles */
 .card{
     background-color: #ffffff;
@@ -23,6 +24,7 @@ input{
     margin: 1rem;
     height: 1.5rem;
     padding: 0.3rem;
+    border: 1px solid #308E99;
 }
 
 .error-message{
@@ -139,13 +141,40 @@ h1{
 /*Cards*/
 .search-card{
     margin: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
+.search-card select{
+    background-color: #ffffff;
+    border: 1px solid #308E99;
+    text-transform: uppercase;
+    border-radius: 0px;
+    height: 1.5rem;
+    margin: 1rem 0rem;
+    width: 100%;
+}
+
+.search-card input{
+    margin: 1rem 0rem;
+    height: 1.5rem;
+    padding: 0rem;
+    border: 1px solid #308E99;
+    width: 100%;
+}
+
+.form-inputs{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
 .auth-form{
     display: flex;
     flex-direction: column;
     padding: 2rem 0;
 }
+
+
 
 
 /*
@@ -156,7 +185,7 @@ h1{
 .trips{
     display: flex;
     flex-direction: column;
-    margin-top: 27rem;
+    margin-top: 20rem;
     padding: 2rem;
 }
 .trip{
@@ -283,6 +312,8 @@ letter-spacing: .1rem;
     flex-direction: column;
 }
 .trip-details-card{
+    display: flex;
+    flex-direction: row;
     margin: .5rem 1rem;
     padding: 1rem;
 }
@@ -406,9 +437,56 @@ Admin Pages
         */
 
         .search-card{
-            width: 50vw;
+            display: flex;
+            justify-content: center;
+            max-width: 40vw;
+            margin-left: 100px;
         }
 
+        .search-card h1{
+            margin-bottom: 0px;
+        }
+
+        .search-card form{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .search-card select{
+            margin: .5rem 1rem;
+            height: 2rem;
+            width: 100%;
+            background-color: #ffffff;
+            border: 1px solid #308E99;
+            text-transform: uppercase;
+            height: 2.5rem;
+        }
+
+     
+        .form-inputs{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            padding: 1rem;
+            width: 100%;
+        }
+
+        .search-card input{
+            margin: .5rem 0rem;
+            height: 2.4rem;
+            padding: 0rem;
+            border-radius: 5px;
+            border: 1px solid #308E99;
+            width: 100%;
+        }
+        .search-card button{
+            width: 100%;
+        }
+
+        .search-card form button{
+            border-radius: 5px;
+            margin: 0rem 5rem;
+        }
         .section-content{
             display: flex;
             flex-wrap: wrap;
@@ -416,7 +494,7 @@ Admin Pages
             align-content: space-between;
         }
         .trips{
-            margin-top: 15rem;
+            margin-top: 3rem;
         }
 
         .trip-section{
@@ -497,12 +575,12 @@ Admin Pages
         }
 
         .trip-details-card{
-            flex: 1;
-            align-items: flex-start;
+            flex: .5;
+            justify-content: space-around;
         }
 
         .trip-details-card div{
-            padding-left: 12rem;
+            margin: 2rem;
         }
 
         /*
