@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "seating_capacity": 50,
+        "origin": "Blantyre",
+        "destination" : "Lilongwe",
+        "trip_date": "10-15-2019",
+        "fare": 55000.50,
+        "status": false,
+        "bus_license_number": "LK 12021"
+    },
+    {
+        "id": 2,
+        "seating_capacity": 50,
+        "origin": "Zomba",
+        "destination" : "Lilongwe",
+        "trip_date": "10-07-2019",
+        "fare": 25000.50,
+        "status": true,
+        "bus_license_number": "BT 1221"
+
+    },
+    {
+        "id": 3,
+        "seating_capacity": 50,
+        "origin": "Mchinji",
+        "destination" : "Lirangwe",
+        "trip_date": "12-07-2019",
+        "fare": 15000.00,
+        "status": true,
+        "bus_license_number": "BN 1021"
+    }
+]

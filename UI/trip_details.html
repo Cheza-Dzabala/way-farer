@@ -26,35 +26,42 @@
                                  </section>
             <section class="single-trip-details">
                             <div class="card trip-details-card">
-                                    <h1>Blantyre - Lilongwe (10 - 01 -2019)</h1>
-                                    <p><strong>License Plate: </strong>BR 7610</p>
-                                    <p><strong>Distance: </strong>900Kms</p>
-                                    <p><strong>Fare: </strong>MK 12,000.00</p>
-                                    <p><strong>Trip Status: </strong><span id="trip-status">On</span></p>
+                                    <span>
+                                            <h1>Blantyre - Lilongwe</h1>
+                                            <div>
+                                              <p><strong>Travel Date: </strong>10 - 01 -2019</p>
+                                              <p><strong>License Plate: </strong>BR 7610</p>
+                                              <p><strong>Distance: </strong>900Kms</p>
+                                              <p><strong>Fare: </strong>MK 12,000.00</p>
+                                              <p><strong>Trip Status: </strong><span id="trip-status">On</span></p>
+                                            </div>
+                                    </span>
+                                    <span>
+                                            <h1>Seat Availability</h1>
+                                            <div>
+                                                  <p><strong>Number of Seats: </strong> - 7</p>
+                                                    <small>(Front To Back)</small>
+                                                    <p><strong>A2: </strong>Isle Seat</p>
+                                                    <p><strong>A4: </strong>Window Seat</p>
+                                                    <p><strong>E1: </strong>Window Seat</p>
+                                                    <p><strong>E2: </strong>Isle Seat</p>
+                                                    <p><strong>E3: </strong>Isle Seat</p>
+                                                    <p><strong>E4: </strong>Window Seat</p>
+                                                    <p><strong>JD: </strong>Window Seat</p>
+                                            </div>
+                                    </span>
+                                    <span>
+                                            <h1>Book your trip</h1>
+                                            <form id="booking-form">
+                                                <input type="text" id="seat_number" name="seat_number" placeholder="Seat Number... ">
+                                                <input type="text" id="card_name" name="card_name" placeholder="Card Name... ">
+                                                <input type="text" id="card_number" name="card_number" placeholder="Card Number... ">
+                                                <input type="month" id="expiry" name="expiry" placeholder="Expiry MM/YY... ">
+                                                <input type="number" id="cvc" name="cvc" placeholder="cvc... ">
+                                                <a href="#" class="btn">Reserve A Seat</a>
+                                            </form>
+                                    </span>
                             </div>
-                            <div class="card trip-details-card">
-                                    <h1>Seat Availability (7 total)</h1>
-                                    <small>(Front To Back)</small>
-                                    <p><strong>A2: </strong>Isle Seat</p>
-                                    <p><strong>A4: </strong>Window Seat</p>
-                                    <p><strong>E1: </strong>Window Seat</p>
-                                    <p><strong>E2: </strong>Isle Seat</p>
-                                    <p><strong>E3: </strong>Isle Seat</p>
-                                    <p><strong>E4: </strong>Window Seat</p>
-                                    <p><strong>JD: </strong>Window Seat</p>
-                            </div>
-                
-                <div class="card book-trip-card">
-                        <h1>Book your trip</h1>
-                        <form id="booking-form">
-                            <input type="text" id="seat_number" name="seat_number" placeholder="Seat Number... ">
-                            <input type="text" id="card_name" name="card_name" placeholder="Card Name... ">
-                            <input type="text" id="card_number" name="card_number" placeholder="Card Number... ">
-                            <input type="month" id="expiry" name="expiry" placeholder="Expiry MM/YY... ">
-                            <input type="number" id="cvc" name="cvc" placeholder="cvc... ">
-                            <a href="#" class="btn">Reserve A Seat</a>
-                        </form>
-                    </div>
             </section>
         </div>
     </main>

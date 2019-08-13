@@ -5,26 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./../css/style.css">
+    <link rel="stylesheet" href="./../css/dialogs.css">
+
     <title>View Trip</title>
 </head>
 <body>
+        <div id="confirmationModal" class="modal">
+                <div class="modal-content"> 
+                  <span class="modal-title">Are you sure you want to cancel this trip?</span>
+                </br>
+                  <div class="modal-buttons">
+                        <button class="btn btn-modal" onclick="handleClick('cancel')">
+                                Yes, I'm sure
+                        </button>
+                        <button class="btn btn-cancel" onclick="handleClick()">
+                            On second thought, No.
+                        </button>
+                  </div>
+                </div>
+              </div>
     <main>
         <div class="container">
                         <section class="showcase">
                                         <div class="nav-container">
                                                      <div class="logo"><a href="#">Way Farer <span id="welcome"></span></a></div>
                                                      <nav class="navigation" id="nav">
-                                                             <a href="./index.html">home</a>
-                                                         <a id="linkAccount" href="./account.html">account</a>
-                                                         <a id="linkSignup" href="./signup.html">sign up</a>
-                                                         <a id="linkSignin" href="./login.html">sign in</a>
-                                                         <a id="linkLogout" onclick="logout()">logout</a>
-                                                             <a href="#">help</a>
+                                                        <a href="./../index.html">home</a>
+                                                        <a id="linkAccount" href="./../account.html">account</a>
+                                                        <a id="linkSignup" href="./../signup.html">sign up</a>
+                                                        <a id="linkSignin" href="./../login.html">sign in</a>
+                                                        <a id="linkAdmin" href="./../admin.html">Admin</a>
+                                                        <a id="linkLogout" onclick="logout()">logout</a>
+                                                            <a href="#">help</a>
                                                      </nav>
                                          </div>
-                                        
                                  </section>
             <section class="content">
+                    <a href="./../admin.html"> Back</a>
                     <div class="card select-user">
                             <h1>Select User: </h1>
                              <select>
@@ -43,8 +60,8 @@
                                     <p><strong>Distance: </strong>900Kms</p>
                                     <p><strong>Fare: </strong>MK 12,000.00</p>
                                     <p><strong>Trip Status: </strong><span id="trip-status">On</span></p>
-                                    <a class="btn btn-cancel" href="#">Cancel Trip</a>
-                                    <a class="btn" href="#">View Passengers</a>
+                                    <button class="btn btn-cancel" href="#" id="cancel">Cancel Trip</button>
+                                    <button class="btn" href="#">View Passengers</button>
                             </div>
                         
                             <div class="card admin-trip-details">
@@ -54,8 +71,8 @@
                                     <p><strong>Distance: </strong>900Kms</p>
                                     <p><strong>Fare: </strong>MK 12,000.00</p>
                                     <p><strong>Trip Status: </strong><span id="trip-status">On</span></p>
-                                    <a class="btn btn-cancel" href="#">Cancel Trip</a>
-                                    <a class="btn" href="#">View Passengers</a>
+                                    <button class="btn btn-cancel" href="#" id="cancel">Cancel Trip</button>
+                                    <button class="btn" href="#">View Passengers</button>
                             </div>
                         
 
@@ -63,7 +80,7 @@
             </section>
         </div>
     </main>
-    <script src="./../js/globals.js"></script>
+    <script src="./../js/dialogs.js"></script>
     <script src="./../js/elements.js"></script>
     <script src="./../js/main.js"></script>
 </body>
