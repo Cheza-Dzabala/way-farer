@@ -8,8 +8,8 @@ node_js:
   - node
 
 before_install:
-  - cd server
-  
+  - cd server && cd v2
+
 install:
   - npm ci
 
@@ -18,6 +18,9 @@ script:
 
 before_script:
   - npm install codeclimate-test-reporter istanbul -g
+  - psql -c "CREATE DATABASE way_farer_test;" -U dev
+  - psql -c "CREATE USER dev WITH PASSWORD 'Runfree8418_!*'';" -U dev
+
 after_script:
   - codeclimate-test-reporter < ./coverage/lcov.info
   - npm run coverage
