@@ -1,4 +1,9 @@
-server/node_modules/
-server/coverage/
-server/.nyc_output/
-server/.env
+server/v1/node_modules/
+server/v1/coverage/
+server/v1/.nyc_output/
+server/v1/.env
+
+server/v2/node_modules/
+server/v2/coverage/
+server/v2/.nyc_output/
+server/v2/.env
