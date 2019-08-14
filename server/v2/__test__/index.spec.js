@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import createDB from './__database_hooks__/createDB';
 import destroyDB from './__database_hooks__/destroyDB';
 import loginTests from './__suits__/signinTest.spec';

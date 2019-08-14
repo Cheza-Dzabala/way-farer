@@ -91,12 +91,6 @@ describe('Sign Up Feature', () => {
         const { body } = res;
         expect(res.status).to.be.equal(201, 'Incorrect Status Code Being Returned');
         expect(body).to.have.property('status', 'success', 'Wrong status message in the body is returned');
-        expect(body).to.have.property('data');
-        expect(body.data.id).to.be.a('number');
-        expect(body.data.id).to.not.be.equal(0);
-        expect(body.data).to.have.property('email', 'demo@myacc.com', 'Email not being returned correctly');
-        expect(body.data).to.have.property('first_name', 'Cheza', 'First name not being returned properly');
-        expect(body.data).to.have.property('last_name', 'Dzabala', 'Last name not being returned properly');
         expect(body.data).to.have.property('token');
         expect(body.data.token).to.be.a('string', 'incorrect token returned');
         done();

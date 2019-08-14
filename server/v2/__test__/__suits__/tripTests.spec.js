@@ -306,8 +306,8 @@ describe('Trip Tests', () => {
         .get(`${endpoint}/@`)
         .end((err, res) => {
           const { status, body } = res;
-          expect(status).to.be.equal(404, 'Incorrect status being returned');
-          expect(body.data.message).to.be.equal('Trip not found', 'Correct message not returned');
+          expect(status).to.be.equal(400, 'Incorrect status being returned');
+          expect(body.data.message).to.be.equal('Invalid character set in parameter', 'Correct message not returned');
           done();
         });
     });

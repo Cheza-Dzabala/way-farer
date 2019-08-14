@@ -1,10 +1,10 @@
 import query from './pool';
-
+import queries from '../helpers/queries';
 
 async function create({
   trip_id, user_id, seat_number,
 }) {
-  const queryText = 'INSERT INTO bookings(trip_id, user_id, seat_number, created_on) VALUES ($1, $2, $3, $4) RETURNING *';
+  const queryText = queries.bookings.insertBooking;
   const values = [trip_id, user_id, seat_number, Date.now()];
   try {
     const { rows } = await query(queryText, values);
@@ -16,7 +16,7 @@ async function create({
 
 
 async function all() {
-  const queryText = 'SELECT * From bookings';
+  const queryText = queries.bookings.selectAllBookings;
   try {
     const { rows } = await query(queryText);
     return rows;
@@ -25,20 +25,8 @@ async function all() {
   }
 }
 
-
-async function findBooking(id) {
-  const queryText = 'SELECT * From bookings WHERE id = $1';
-  const values = [id];
-  try {
-    const { rows } = await query(queryText, values);
-    return rows[0];
-  } catch (error) {
-    console.log(`Database ${error}`);
-  }
-}
-
 async function userBookings(id) {
-  const queryText = 'SELECT * From bookings WHERE user_id = $1';
+  const queryText = queries.bookings.selectWhereBookings;
   const values = [id];
   try {
     const { rows } = await query(queryText, values);
@@ -49,7 +37,7 @@ async function userBookings(id) {
 }
 
 async function deleteBooking(id) {
-  const queryText = 'DELETE FROM bookings WHERE id = $1';
+  const queryText = queries.bookings.deleteFromBookingsWhere;
   const values = [id];
   try {
     const { rows } = await query(queryText, values);
@@ -62,7 +50,7 @@ async function deleteBooking(id) {
 async function createAdmin({
   first_name, last_name, email, password,
 }) {
-  const queryText = 'INSERT INTO bookings(first_name, last_name, email, password, is_admin) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+  const queryText = queries.bookings.insertBooking;
   const values = [first_name, last_name, email, password, true];
   try {
     const { rows } = await query(queryText, values);
@@ -74,5 +62,5 @@ async function createAdmin({
 
 
 module.exports = {
-  create, findBooking, userBookings, deleteBooking, all, createAdmin,
+  create, userBookings, deleteBooking, all, createAdmin,
 };

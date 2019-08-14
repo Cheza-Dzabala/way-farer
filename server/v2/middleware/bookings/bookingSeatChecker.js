@@ -1,5 +1,5 @@
 import bookingsModel from '../../models/bookingsModel';
-import Response from '../responseHelper';
+import Response from '../../helpers/responseHelper';
 
 export default async (req, res, next) => {
   const { body } = req;

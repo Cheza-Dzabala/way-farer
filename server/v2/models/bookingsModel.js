@@ -1,5 +1,5 @@
-import tripsModel from './tripsModel';
-import usersModel from './userModel';
+import fetchHelper from '../helpers/fetchHelper';
+import queries from '../helpers/queries';
 import dbService from '../services/bookingsServices';
 
 class Bookings {
@@ -14,8 +14,8 @@ class Bookings {
   }
 
   async bookingModel() {
-    const user = await usersModel.findUserById(this.user_id);
-    const trip = await tripsModel.findTrip(this.trip_id);
+    const user = await fetchHelper(queries.users.selectById, [this.user_id]);
+    const trip = await fetchHelper(queries.trips.selectOneTrip, [this.trip_id]);
     return {
       booking_id: this.id,
       trip_id: trip.id,
@@ -27,11 +27,6 @@ class Bookings {
       user_email: user.email,
     };
   }
-}
-
-async function findBooking(id) {
-  const booking = await dbService.findBooking(id);
-  return booking;
 }
 async function allBookings() {
   const bookings = await dbService.all();
@@ -48,7 +43,7 @@ async function allBookings() {
 async function userBookings(id) {
   let bookings = false;
   const payload = [];
-  const user = await usersModel.findUserById(id);
+  const user = await fetchHelper(queries.users.selectById, [id]);
   if (user) {
     bookings = await dbService.userBookings(id);
     await bookings.reduce(async (promise, booking) => {
@@ -83,5 +78,5 @@ async function deleteBooking(booking) {
   }
 }
 module.exports = {
-  allBookings, userBookings, createBooking, findBooking, deleteBooking,
+  allBookings, userBookings, createBooking, deleteBooking,
 };

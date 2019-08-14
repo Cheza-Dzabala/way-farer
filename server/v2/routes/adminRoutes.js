@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import adminController from '../controllers/adminController';
-import adminCheck from '../middleware/adminCheckMiddleware';
+import adminCheck from '../middleware/admin/adminCheckMiddleware';
 import authorization from '../middleware/authenticationCheck';
 import signupValidation from '../middleware/validationMiddleware/signupValidationMiddleware';
 

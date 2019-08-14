@@ -1,7 +1,5 @@
 import userModel from '../../models/userModel';
-
 import authValidations from '../../validations/authValidations';
-
 import Response from '../../helpers/responseHelper';
 
 export default async (req, res, next) => {

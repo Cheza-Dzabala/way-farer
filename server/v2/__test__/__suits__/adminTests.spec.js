@@ -192,8 +192,6 @@ describe('Log In: with non admin', () => {
         expect(res.status).to.be.equal(200, 'Incorrect Status Code Being Returned');
         expect(body).to.have.property('status', 'success', 'Wrong status message in the body is returned');
         expect(body).to.have.property('data');
-        expect(body.data.id).to.be.a('number');
-        expect(body.data.id).to.not.be.equal(0);
         expect(body.data).to.have.property('token');
         expect(body.data.token).to.be.a('string', 'incorrect token returned');
         done();

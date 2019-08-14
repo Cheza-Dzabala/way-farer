@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import bookingsController from '../controllers/bookingsController';
 import authorization from '../middleware/authenticationCheck';
-import validationMiddleware from '../middleware/validationMiddleware/bookingsValidationMiddleware';
-import relationshipChecker from '../helpers/bookingHelpers/bookingRelationships';
-import verifyBooking from '../helpers/bookingHelpers/verifyBooking';
-import seatChecker from '../helpers/bookingHelpers/bookingSeatChecker';
+import validationMiddleware from '../middleware/bookings/bookingsValidationMiddleware';
+import relationshipChecker from '../middleware/bookings/bookingRelationships';
+import verifyBooking from '../middleware/bookings/verifyBooking';
+import seatChecker from '../middleware/bookings/bookingSeatChecker';
 
 const router = Router();
 

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 const signNewToken = (user, res, status) => jwt.sign({ user }, process.env.SECRET_KEY, { expiresIn: '1d' }, (err, token) => res.status(status).json({
   status: 'success',
-  data: { ...user, token },
+  data: { token },
   // ... Splice out the user data from the user object and attach the token to the data object
 }));
 

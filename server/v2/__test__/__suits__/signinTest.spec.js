@@ -46,11 +46,9 @@ describe('Signin Functionality', () => {
       .send(validAcc)
       .end((err, res) => {
         const { body } = res;
-
         expect(res).to.have.property('status', 200, 'Status returned is not 200');
         expect(body.data).to.be.a('object', 'Data object is not returned');
         expect(body.data).to.have.property('token');
-
         done();
       });
   });

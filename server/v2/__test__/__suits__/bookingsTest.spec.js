@@ -35,17 +35,6 @@ const validAcc = {
   password: 'Runfree8418_!*',
 };
 
-const authenticateUser = () => new Promise((resolve, reject) => {
-  chai.request(app)
-    .post(`${version}auth/signin`)
-    .send(validAcc)
-    .end((err, res) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(res.body.token);
-    });
-});
 describe('Booking Tests', () => {
   let token = false;
   before((done) => {
@@ -146,6 +135,7 @@ describe('Booking Tests', () => {
         .set('token', `bearer ${token}`)
         .end((err, res) => {
           const { status, body } = res;
+          console.log(body);
           expect(status).to.be.equal(200, 'User not being returned with appropriate status codes');
           expect(body).to.have.property('data');
           expect(body.data).to.be.a('array', 'wrong data type being returned');
@@ -160,6 +150,7 @@ describe('Booking Tests', () => {
         .set('token', `bearer ${token}`)
         .end((err, res) => {
           const { body } = res;
+          console.log(body);
           expect(res.status).to.be.equal(200, 'Incorrect Status being returned');
           expect(body.status).to.be.equal('success', 'Incorrect body status being returned');
           expect(body.data.message).to.be.equal('Successfully deleted booking', 'Incorrect booking being returned');
