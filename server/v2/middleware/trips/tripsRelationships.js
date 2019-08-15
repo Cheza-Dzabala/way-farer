@@ -9,7 +9,7 @@ export default async (req, res, next) => {
     while (len < busses.length) {
       if (busses[len] !== undefined) {
         if (busses[len].trip_date === body.trip_date) {
-          return Response(res, 209, 'unsuccessful', { message: 'This bus is already booked on a trip on this date' });
+          return Response(res, 209, 'This bus is already booked on a trip on this date', { });
         }
       }
       len += 1;

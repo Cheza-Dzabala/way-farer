@@ -19,7 +19,7 @@ async function createAdmin() {
 
 async function createTrip() {
   const queryText = queries.trips.insertTrip;
-  const values = [true, 'Mulanje', 'Kampala', '50000', '50', '10-10-2019', 'BT 2293'];
+  const values = [true, 'Mulanje', 'Kampala', '50000', '50', '50', '10-10-2019', 'BT 2293'];
   await query(queryText, values);
 }
 

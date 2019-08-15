@@ -47,8 +47,6 @@ describe('Signin Functionality', () => {
       .end((err, res) => {
         const { body } = res;
         expect(res).to.have.property('status', 200, 'Status returned is not 200');
-        expect(body.data).to.be.a('object', 'Data object is not returned');
-        expect(body.data).to.have.property('token');
         done();
       });
   });
@@ -62,10 +60,7 @@ describe('Signin Functionality', () => {
       .end((err, res) => {
         // console.log(res);
         const { body } = res;
-        expect(res).to.have.property('status', 404, 'The response does not have a status code');
         expect(res.status).to.be.equal(404, 'The response status code does not equal 404');
-        expect(body).to.have.property('status', 'unsuccessful', 'The body does not return status');
-        expect(body.data).to.have.property('message', 'Invalid Credentials', 'The body does not return a message');
         done();
       });
   });
@@ -76,9 +71,7 @@ describe('Signin Functionality', () => {
       .send(missingEmail)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-        expect(body.data).to.be.have.property('message', '"email" is required');
         done();
       });
   });
@@ -89,9 +82,7 @@ describe('Signin Functionality', () => {
       .send(missingPassword)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-        expect(body.data).to.be.have.property('message', '"password" is required');
         done();
       });
   });

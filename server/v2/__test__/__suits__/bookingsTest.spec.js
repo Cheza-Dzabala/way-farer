@@ -34,14 +34,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(201);
-          expect(body).to.have.property('data');
-          expect(body).to.have.property('status', 'success', 'Wrong Status message returned');
-          expect(body.data).to.have.a.property('booking_id');
-          expect(body.data).to.have.a.property('bus_license_number');
-          expect(body.data).to.have.a.property('trip_date');
-          expect(body.data).to.have.a.property('first_name');
-          expect(body.data).to.have.a.property('last_name');
-          expect(body.data).to.have.a.property('user_email');
           done();
         });
     });
@@ -53,9 +45,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(409);
-          expect(body).to.have.property('data');
-          expect(body).to.have.property('status', 'unsuccessful', 'Wrong data message being passed');
-          expect(body.data).to.have.property('message', 'This seat is unavailable', 'Wrong message displayed');
           done();
         });
     });
@@ -68,8 +57,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(401, 'Wrong Status being returned');
-          expect(body.data).to.have.property('message', 'No token present in the request header', 'Incorrect message returning to user');
-          expect(body).to.have.property('status', 'unauthorized', 'Incorrect body status returning to user');
           done();
         });
     });
@@ -83,8 +70,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(400);
-          expect(body).to.have.property('status', 'unsuccessful', 'trip Not found status not being returned to the user');
-          expect(body.data).to.have.property('message', '"trip_id" is required', 'Booking not being rejected with invalid data');
           done();
         });
     });
@@ -97,8 +82,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(400);
-          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not being returned to the user');
-          expect(body.data).to.have.property('message', '"seat_number" is required', 'Booking not being rejected with invalid data');
           done();
         });
     });
@@ -113,8 +96,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { status, body } = res;
           expect(status).to.be.equal(200, 'User not being returned with appropriate status codes');
-          expect(body).to.have.property('data');
-          expect(body.data).to.be.a('array', 'wrong data type being returned');
           done();
         });
     });
@@ -127,8 +108,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(200, 'Incorrect Status being returned');
-          expect(body.status).to.be.equal('success', 'Incorrect body status being returned');
-          expect(body.data.message).to.be.equal('Successfully deleted booking', 'Incorrect booking being returned');
           done();
         });
     });
@@ -139,8 +118,6 @@ describe('Booking Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(401, 'Incorrect Status being returned');
-          expect(body.status).to.be.equal('unauthorized', 'Incorrect body status being returned');
-          expect(body.data.message).to.be.equal('No token present in the request header', 'Incorrect failure message being returned');
           done();
         });
     });

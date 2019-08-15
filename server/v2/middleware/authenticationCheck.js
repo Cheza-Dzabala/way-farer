@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import Response from '../helpers/responseHelper';
 
 const signNewToken = (user, res, status) => jwt.sign({ user }, process.env.SECRET_KEY, { expiresIn: '1d' }, (err, token) => res.status(status).json({
   status: 'success',
@@ -20,19 +21,14 @@ const setToken = (req, res, next) => {
     req.token = bearerToken;
     next();
   } else {
-    return res.status(401).json({
-      status: 'unauthorized',
-      data: {
-        message: 'No token present in the request header',
-      },
-    });
+    return Response(res, 401, 'No token present in the request header', {});
   }
 };
 
 const verifyToken = (req, res, next) => {
   jwt.verify(req.token, process.env.SECRET_KEY, (err, decoded) => {
     if (err) {
-      return res.status(403).json({ status: 'Invalid Token', data: { message: 'Could not verify the token, please log in again' } });
+      return Response(res, 401, 'Could not verify the token, please log in again', {});
     }
     next();
   });

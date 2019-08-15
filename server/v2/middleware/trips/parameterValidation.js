@@ -5,5 +5,5 @@ export default async (req, res, next) => {
   if (id > 0) {
     return next();
   }
-  return Response(res, 400, 'error', { message: 'Invalid character set in parameter' });
+  return Response(res, 400, 'Invalid character set in parameter', { });
 };

@@ -1,11 +1,12 @@
 import query from './pool';
 import queries from '../helpers/queries';
+import Response from '../helpers/responseHelper';
 
 async function create({
-  trip_id, user_id, seat_number,
+  trip_id, user_id, number_of_seats,
 }) {
   const queryText = queries.bookings.insertBooking;
-  const values = [trip_id, user_id, seat_number, Date.now()];
+  const values = [trip_id, user_id, number_of_seats, Date.now()];
   try {
     const { rows } = await query(queryText, values);
     return rows[0];

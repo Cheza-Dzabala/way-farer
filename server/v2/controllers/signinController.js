@@ -9,7 +9,7 @@ async function signin(body, res) {
   if (user) {
     return authenticationCheck.signNewToken(user.id, res, 200);
   }
-  return Response(res, 404, 'unsuccessful', { message: 'Invalid Credentials' });
+  return Response(res, 404, 'Invalid Credentials', { });
 }
 
 module.exports = {

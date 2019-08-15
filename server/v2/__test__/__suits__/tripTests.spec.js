@@ -45,8 +45,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(401, 'Incorrect status code returned in header');
-          expect(body.data).to.have.property('message', 'No token present in the request header', 'Incorrect message returning to user');
-          expect(body).to.have.property('status', 'unauthorized', 'Incorrect body status returning to user');
           done();
         });
     });
@@ -59,7 +57,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(201);
-          expect(body).to.have.property('data');
           done();
         });
     });
@@ -73,9 +70,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { body: { data, status } } = res;
           expect(res.status).to.be.equal(209);
-          expect(status).to.be.equal('unsuccessful');
-          expect(status).to.be.equal('unsuccessful', 'Wrong Status message returned');
-          expect(data).to.have.property('message', 'This bus is already booked on a trip on this date', 'Wrong message returned');
           done();
         });
     });
@@ -90,7 +84,6 @@ describe('Trip Tests', () => {
           .end((err, res) => {
             const { body: { data }, status } = res;
             expect(status).to.be.equal(400);
-            expect(data).to.have.property('message', '"origin" is not allowed to be empty', 'Wrong message bring returned');
             done();
           });
       });
@@ -103,7 +96,6 @@ describe('Trip Tests', () => {
           .end((err, res) => {
             const { body: { data }, status } = res;
             expect(res.status).to.be.equal(400);
-            expect(data).to.have.property('message', '"destination" is not allowed to be empty', 'Wrong message bring returned');
             done();
           });
       });
@@ -117,7 +109,6 @@ describe('Trip Tests', () => {
           .end((err, res) => {
             const { body: { data }, status } = res;
             expect(status).to.be.equal(400);
-            expect(data).to.have.property('message', '"trip_date" must be a number of milliseconds or valid date string', 'Wrong message bring returned');
             done();
           });
       });
@@ -171,9 +162,6 @@ describe('Trip Tests', () => {
             const { body } = res;
             const { data } = body;
             expect(res.status).to.be.equal(403);
-            expect(body).to.have.property('data');
-            expect(data).to.have.property('message', 'Only admins can access this section', 'Wrong message returned');
-            expect(body).to.have.property('status', 'Unauthorized', 'Wrong Status message returned');
             done();
           });
       });
@@ -189,7 +177,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { status, body } = res;
           expect(status).to.be.equal(200, 'Incorrect status being returned');
-          expect(body).to.be.a('object');
           done();
         });
     });
@@ -201,7 +188,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { status, body } = res;
           expect(status).to.be.equal(200, 'Incorrect status being returned');
-          expect(body.data).to.be.a('object');
           done();
         });
     });
@@ -212,7 +198,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { status, body } = res;
           expect(status).to.be.equal(404, 'Incorrect status being returned');
-          expect(body.data.message).to.be.equal('Trip not found', 'Correct message not returned');
           done();
         });
     });
@@ -223,7 +208,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { status, body } = res;
           expect(status).to.be.equal(400, 'Incorrect status being returned');
-          expect(body.data.message).to.be.equal('Invalid character set in parameter', 'Correct message not returned');
           done();
         });
     });
@@ -237,8 +221,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(200, 'Incorrect Status Code Returning');
-          expect(body.status).to.be.equal('success', 'incorrect body status returning');
-          expect(body.data.message).to.be.equal('Trip cancelled successfully', 'incorrect body message returning');
           done();
         });
     });
@@ -250,8 +232,6 @@ describe('Trip Tests', () => {
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(400, 'Returning wrong status');
-          expect(body.status).to.be.equal('unsuccessful', 'Returning invalid trip status');
-          expect(body.data.message).to.be.equal('Trip does not exist', 'Returning invalid message');
           done();
         });
     });

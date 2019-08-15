@@ -17,7 +17,7 @@ export default async function (req, res, next) {
   const userObject = await fetchHelper(queries.users.selectById, [userId]);
   // console.log(userObject);
   if (!userObject.is_admin) {
-    return Response(res, 403, 'Unauthorized', { message: 'Only admins can access this section' });
+    return Response(res, 403, 'Only admins can access this section', { });
   }
   return next();
 }

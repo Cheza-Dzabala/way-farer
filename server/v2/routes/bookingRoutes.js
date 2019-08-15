@@ -6,12 +6,13 @@ import relationshipChecker from '../middleware/bookings/bookingRelationships';
 import verifyBooking from '../middleware/bookings/verifyBooking';
 import superUserDelete from '../middleware/bookings/superUserDelete';
 import seatChecker from '../middleware/bookings/bookingSeatChecker';
+import verifyAvailableSeats from '../middleware/bookings/verifyAvailableSeats';
 
 const router = Router();
 
 router.use(authorization.setToken, authorization.verifyToken);
 
 router.get('/', (req, res) => bookingsController.getBookings(req, res));
-router.post('/', validationMiddleware, relationshipChecker, seatChecker, (req, res) => bookingsController.createBooking(req, res));
+router.post('/', validationMiddleware, relationshipChecker, seatChecker, verifyAvailableSeats, (req, res) => bookingsController.createBooking(req, res));
 router.delete('/:id', verifyBooking, superUserDelete, (req, res) => bookingsController.deleteBooking(req, res));
 module.exports = router;
