@@ -37,7 +37,7 @@
     "start": "NODE_ENV=dev npm run create && NODE_ENV=dev babel-watch server.js",
     "test": "NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --require @babel/polyfill --require @babel/register __test__/index.spec.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "deploy": "cd ../ && git subtree push --prefix server/v2/ heroku/wayfarer55 master",
+    "deploy": "cd ../../ && git subtree push --prefix server/v2/ heroku/cheza-way-farer master",
     "create": "node --require @babel/polyfill --require @babel/register ./services/dbInit createTables"
   },
   "author": "Macheza Dzabala",
