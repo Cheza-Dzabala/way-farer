@@ -34,8 +34,8 @@
     "nyc": "14.1.1"
   },
   "scripts": {
-    "start": "NODE_ENV=production npm run create && NODE_ENV=dev babel-watch server.js",
-    "dev": "NODE_ENV=dev npm run create && NODE_ENV=dev babel-watch server.js",
+    "start": "NODE_ENV=production npm run create && babel-watch server.js",
+    "dev": "NODE_ENV=dev npm run create && babel-watch server.js",
     "test": "NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --require @babel/polyfill --require @babel/register __test__/index.spec.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "deploy": "cd ../../ && git subtree push --prefix server/v2/ heroku/cheza-way-farer master",

@@ -1,4 +1,6 @@
 import app from '../../app';
+import users from '../__test_data__/users';
+import trips from '../__test_data__/trips';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -10,99 +12,17 @@ chai.use(chaiHttp);
 const version = '/api/v2/';
 
 const endpoint = `${version}trips`;
-const validAcc = {
-  email: 'dzabalamacheza@gmail.com',
-  password: 'Runfree8418_!*',
-};
-
-const nonAdmin = {
-  email: 'demo@myacc.com',
-  password: 'Runfree8',
-};
-
-const validTrip = {
-  fare: 45000.10,
-  origin: 'Mzuzu',
-  destination: 'Blantyre',
-  trip_date: '10-10-2019',
-  seating_capacity: 20,
-  bus_license_number: 'BT 1182',
-};
-
-const doubleBookedTrip = {
-  fare: 45000.10,
-  origin: 'karonga',
-  destination: 'Chintheche',
-  trip_date: '10-10-2019',
-  seating_capacity: 20,
-  bus_license_number: 'BT 1182',
-};
-
-
-const originEmptyString = {
-  fare: 45000.10,
-  origin: ' ',
-  destination: 'Blantyre',
-  trip_date: '10-10-2019',
-  seating_capacity: 20,
-  bus_license_number: 'BT 1182',
-};
-
-const destinationEmptyString = {
-  fare: 45000.10,
-  origin: 'Mzuzu',
-  destination: '   ',
-  trip_date: '10-10-2019',
-  seating_capacity: 20,
-  bus_license_number: 'BT 1182',
-};
-
-const dateEmptyString = {
-  fare: 45000.10,
-  origin: 'Mzuzu',
-  destination: 'Zomba',
-  trip_date: ' ',
-  seating_capacity: 20,
-  bus_license_number: 'BT 1182',
-};
-
-
-const fareNegativeNumber = {
-  fare: -45000.10,
-  origin: 'Mzuzu',
-  destination: 'Blantyre',
-  trip_date: '10-10-2019',
-  seating_capacity: 20,
-  bus_license_number: 'BT 1182',
-};
-
-const seatingCapacityNegativeNumber = {
-  fare: 45000.10,
-  origin: 'Mzuzu',
-  destination: 'Blantyre',
-  trip_date: '10-10-2019',
-  seating_capacity: -20,
-  bus_license_number: 'BT 1182',
-};
-
-const validTripTwo = {
-  fare: 45000.10,
-  origin: 'Mzuzu',
-  destination: 'Blantyre',
-  trip_date: '10-11-2019',
-  seating_capacity: 20,
-  bus_license_number: 'BT 1182',
-};
 
 describe('Trip Tests', () => {
   let token = false;
   before((done) => {
     chai.request(app)
       .post(`${version}auth/signin`)
-      .send(validAcc)
+      .send(users.admin)
       .end((err, res) => {
         const { body } = res;
-        token = body.data.token;
+        const collectedToken = body.data.token;
+        token = collectedToken;
         expect(body.data.token);
         done();
       });
@@ -121,7 +41,7 @@ describe('Trip Tests', () => {
     it('- Should not allow requests that do not have a token attached to the header', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(validTrip)
+        .send(trips.validTrip)
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(401, 'Incorrect status code returned in header');
@@ -135,13 +55,11 @@ describe('Trip Tests', () => {
       chai.request(app)
         .post(endpoint)
         .set('token', `bearer ${token}`)
-        .send(validTrip)
+        .send(trips.validTrip)
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(201);
           expect(body).to.have.property('data');
-          expect(body).to.have.property('status', 'success', 'Wrong Status message returned');
-          expect(body.data).to.include(validTrip);
           done();
         });
     });
@@ -151,7 +69,7 @@ describe('Trip Tests', () => {
       chai.request(app)
         .post(endpoint)
         .set('token', `bearer ${token}`)
-        .send(doubleBookedTrip)
+        .send(trips.doubleBookedTrip)
         .end((err, res) => {
           const { body: { data, status } } = res;
           expect(res.status).to.be.equal(209);
@@ -168,7 +86,7 @@ describe('Trip Tests', () => {
         chai.request(app)
           .post(endpoint)
           .set('token', `bearer ${token}`)
-          .send(originEmptyString)
+          .send(trips.originEmptyString)
           .end((err, res) => {
             const { body: { data }, status } = res;
             expect(status).to.be.equal(400);
@@ -181,7 +99,7 @@ describe('Trip Tests', () => {
         chai.request(app)
           .post(endpoint)
           .set('token', `bearer ${token}`)
-          .send(destinationEmptyString)
+          .send(trips.destinationEmptyString)
           .end((err, res) => {
             const { body: { data }, status } = res;
             expect(res.status).to.be.equal(400);
@@ -195,7 +113,7 @@ describe('Trip Tests', () => {
         chai.request(app)
           .post(endpoint)
           .set('token', `bearer ${token}`)
-          .send(dateEmptyString)
+          .send(trips.dateEmptyString)
           .end((err, res) => {
             const { body: { data }, status } = res;
             expect(status).to.be.equal(400);
@@ -210,11 +128,10 @@ describe('Trip Tests', () => {
         chai.request(app)
           .post(endpoint)
           .set('token', `bearer ${token}`)
-          .send(fareNegativeNumber)
+          .send(trips.fareNegativeNumber)
           .end((err, res) => {
-            const { body: { data }, status } = res;
+            const { status } = res;
             expect(status).to.be.equal(400);
-            expect(data).to.have.property('message', '"fare" must be a positive number', 'Wrong message bring returned');
             done();
           });
       });
@@ -222,11 +139,10 @@ describe('Trip Tests', () => {
         chai.request(app)
           .post(endpoint)
           .set('token', `bearer ${token}`)
-          .send(seatingCapacityNegativeNumber)
+          .send(trips.seatingCapacityNegativeNumber)
           .end((err, res) => {
-            const { body: { data }, status } = res;
+            const { status } = res;
             expect(status).to.be.equal(400);
-            expect(data).to.have.property('message', '"seating_capacity" must be a positive number', 'Wrong message bring returned');
             done();
           });
       });
@@ -238,7 +154,7 @@ describe('Trip Tests', () => {
       beforeEach((done) => {
         chai.request(app)
           .post(`${version}auth/signin`)
-          .send(nonAdmin)
+          .send(users.nonAdmin)
           .end((err, res) => {
             const { body } = res;
             nonAdminToken = body.data.token;
@@ -250,7 +166,7 @@ describe('Trip Tests', () => {
         chai.request(app)
           .post(endpoint)
           .set('token', `bearer ${nonAdminToken}`)
-          .send(validTripTwo)
+          .send(trips.validTripTwo)
           .end((err, res) => {
             const { body } = res;
             const { data } = body;
@@ -316,7 +232,7 @@ describe('Trip Tests', () => {
   describe('Trip "PATCH" Routes', () => {
     it('Should allow to pacth a trips', (done) => {
       chai.request(app)
-        .patch(`${endpoint}/1/cancel`)
+        .patch(`${endpoint}/2/cancel`)
         .set('token', `bearer ${token}`)
         .end((err, res) => {
           const { body, status } = res;

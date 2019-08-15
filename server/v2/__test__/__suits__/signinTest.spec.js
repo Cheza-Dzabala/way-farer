@@ -14,7 +14,7 @@ describe('Signin Functionality', () => {
 
   const validAcc = {
     email: 'dzabalamacheza@gmail.com',
-    password: 'Runfree8418_!*',
+    password: 'Runfree8418',
   };
 
   const invalidAcc = {
