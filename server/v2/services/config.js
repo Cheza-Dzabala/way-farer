@@ -5,7 +5,13 @@ dotenv.config();
 
 const { NODE_ENV } = process.env;
 
-let config;
+
+let config = {
+  user: process.env.PGUSER,
+  database: (NODE_ENV === 'test' ? process.env.PG_TEST_DATABASE : process.env.PG_DATABASE),
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+};
 if (NODE_ENV === 'production') {
   config = {
     user: process.env.HEROKU_USER,
@@ -15,17 +21,13 @@ if (NODE_ENV === 'production') {
     url: process.env.HEROKU_URI,
     host: process.env.HEROKU_HOST,
   };
-} else if (NODE_ENV === 'test' || NODE_ENV === 'dev') {
+} else if (NODE_ENV === 'test') {
   config = {
-
-    host: process.env.HOST,
-    user: process.env.PGUSER, // this is the db user credential
-    database: (NODE_ENV === 'test' ? process.env.PG_TEST_DATABASE : process.env.PGDB),
+    user: process.env.PGUSER,
+    database: (NODE_ENV === 'test' ? process.env.PG_TEST_DATABASE : process.env.PG_DATABASE),
     password: process.env.PGPASSWORD,
     port: process.env.PGPORT,
   };
 }
 
-
-console.log(config);
 module.exports = config;
