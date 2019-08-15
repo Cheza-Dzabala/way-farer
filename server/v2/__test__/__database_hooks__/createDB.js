@@ -1,51 +1,33 @@
 import bcrypt from 'bcrypt';
 import query from '../../services/pool';
+import queries from '../../helpers/queries';
 
 const hashIt = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 
-const usersTable = `CREATE TABLE IF NOT EXISTS
-              users(
-              id SERIAL PRIMARY KEY,
-              first_name VARCHAR(128) NOT NULL,
-              last_name VARCHAR(128) NOT NULL,
-              email VARCHAR(128) NOT NULL,
-              password VARCHAR(128) NOT NULL,
-              is_admin BOOLEAN DEFAULT 'f'
-            )`;
-
-const tripsTable = `CREATE TABLE IF NOT EXISTS
-              trips(
-              id SERIAL PRIMARY KEY,
-              bus_license_number VARCHAR(128) NOT NULL,
-              origin VARCHAR(128) NOT NULL,
-              destination VARCHAR(128) NOT NULL,
-              fare FLOAT(2) NOT NULL,
-              seating_capacity INTEGER NOT NULL,
-              trip_date VARCHAR(128) NOT NULL,
-              status BOOLEAN DEFAULT 'true'
-            )`;
-
-
-const bookingsTable = `CREATE TABLE IF NOT EXISTS
-              bookings(
-              id SERIAL,
-              trip_id  INTEGER NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
-              user_id  INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-              seat_number  VARCHAR (128) NOT NULL,
-              created_on VARCHAR (128) NOT NULL,
-              PRIMARY KEY(trip_id, user_id)
-            )`;
 
 const tables = [
-  tripsTable, usersTable, bookingsTable,
+  queries.createTables.tripsTable,
+  queries.createTables.usersTable,
+  queries.createTables.bookingsTable,
 ];
 
 async function createAdmin() {
-  const queryText = 'INSERT INTO users(first_name, last_name, email, password, is_admin) VALUES($1, $2, $3, $4, $5) RETURNING *';
-  const values = ['Macheza', 'Dzabala', 'dzabalamacheza@gmail.com', hashIt('Runfree8418_!*'), true];
-  query(queryText, values);
+  const queryText = queries.admins.insertAdmin;
+  const values = ['Macheza', 'Dzabala', 'dzabalamacheza@gmail.com', hashIt('Runfree8418'), true];
+  await query(queryText, values);
 }
 
+async function createNonAdmin() {
+  const queryText = queries.users.insertUser;
+  const values = ['Michealangelo', 'Davinci', 'davinciforsure@gmail.com', hashIt('Runfree8418')];
+  await query(queryText, values);
+}
+
+async function createTrip() {
+  const queryText = queries.trips.insertTrip;
+  const values = [true, 'Mulanje', 'Kampala', '50000', '50', '10-10-2019', 'BT 2293'];
+  await query(queryText, values);
+}
 
 export default async function createTables() {
   await tables.reduce(async (promise, table) => {
@@ -54,4 +36,6 @@ export default async function createTables() {
   }, Promise.resolve());
 
   await createAdmin();
+  await createNonAdmin();
+  await createTrip();
 }
