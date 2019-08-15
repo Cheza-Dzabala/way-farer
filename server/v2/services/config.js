@@ -9,8 +9,6 @@ let database;
 let password;
 let port;
 let url;
-let max;
-let idleTimeoutMillis;
 
 if (NODE_ENV === 'production') {
   user = process.env.HEROKU_USER;
@@ -23,8 +21,6 @@ if (NODE_ENV === 'production') {
   database = (NODE_ENV === 'test' ? process.env.PG_TEST_DATABASE : process.env.PGDB);
   password = process.env.PGPASSWORD;
   port = process.env.PGPORT;
-  max = process.env.PGMAX; // max number of clients in the pool
-  idleTimeoutMillis = process.env.PGTIMEOUT;
 }
 
 const config = {
