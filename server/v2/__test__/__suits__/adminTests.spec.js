@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
+import users from '../__test_data__/users';
 
 process.env.NODE_ENV = 'test';
 
@@ -10,53 +11,12 @@ chai.use(chaiHttp);
 
 const endpoint = `${version}admins`;
 
-const nonAdmin = {
-  email: 'demo@myacc.com',
-  password: 'Runfree8',
-};
-
-const admin = {
-  email: 'dzabalamacheza@gmail.com',
-  password: 'Runfree8418_!*',
-};
-
-const newAdminAcc = {
-  email: 'kwaigonjin@myacc.com',
-  first_name: 'Kwaigon',
-  last_name: 'Jinn',
-  password: 'Runfree8',
-};
-
-const missingLastName = {
-  email: 'anotheradmin@myacc.com',
-  first_name: 'Kwaigon',
-  password: 'Runfree8',
-};
-
-const missingFirstName = {
-  email: 'anotheradmin@myacc.com',
-  last_name: 'Jinn',
-  password: 'Runfree8',
-};
-
-
-const missingPassword = {
-  email: 'anotheradmin@myacc.com',
-  first_name: 'Kwaigon',
-  last_name: 'Jinn',
-};
-
-const missingEmail = {
-  first_name: 'Kwaigon',
-  last_name: 'Jinn',
-  password: 'Runfree8',
-};
 describe('Admin Routes', () => {
   let token = false;
   before((done) => {
     chai.request(app)
       .post(`${version}auth/signin`)
-      .send(admin)
+      .send(users.admin)
       .end((err, res) => {
         const { body } = res;
         token = `bearer ${body.data.token}`;
@@ -93,18 +53,12 @@ describe('Admin Routes', () => {
     it('Should create a new admin successfully', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(newAdminAcc)
+        .send(users.newAdminAcc)
         .set('token', token)
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(201, 'Incorrect Status Code Being Returned');
           expect(body).to.have.property('status', 'success', 'Wrong status message in the body is returned');
-          expect(body).to.have.property('data');
-          expect(body.data.id).to.be.a('number');
-          expect(body.data.id).to.not.be.equal(0);
-          expect(body.data).to.have.property('email', 'kwaigonjin@myacc.com', 'Email not being returned correctly');
-          expect(body.data).to.have.property('first_name', 'Kwaigon', 'First name not being returned properly');
-          expect(body.data).to.have.property('last_name', 'Jinn', 'Last name not being returned properly');
           done();
         });
     });
@@ -112,7 +66,7 @@ describe('Admin Routes', () => {
     it('Should Reject admin account if Email already exists', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(admin)
+        .send(users.admin)
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
@@ -126,7 +80,7 @@ describe('Admin Routes', () => {
     it('Should Reject admin account if Email is not provided', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(missingEmail)
+        .send(users.missingEmail)
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
@@ -140,7 +94,7 @@ describe('Admin Routes', () => {
     it('Should Reject admin account if Password is not provided', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(missingPassword)
+        .send(users.missingPassword)
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
@@ -154,7 +108,7 @@ describe('Admin Routes', () => {
     it('Should Reject admin account if first name is not provided', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(missingFirstName)
+        .send(users.missingFirstName)
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
@@ -167,7 +121,7 @@ describe('Admin Routes', () => {
     it('Should Reject admin account if last name is not provided', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(missingLastName)
+        .send(users.missingLastName)
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
@@ -185,7 +139,7 @@ describe('Log In: with non admin', () => {
   beforeEach((done) => {
     chai.request(app)
       .post(`${version}auth/signin`)
-      .send(nonAdmin)
+      .send(users.nonAdmin)
       .end((err, res) => {
         const { body } = res;
         badToken = `bearer ${body.data.token}`;

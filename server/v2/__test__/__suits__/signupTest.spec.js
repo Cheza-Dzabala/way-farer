@@ -1,4 +1,5 @@
 import app from '../../app';
+import users from '../__test_data__/users';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -12,71 +13,10 @@ const version = '/api/v2/';
 describe('Sign Up Feature', () => {
   const endpoint = `${version}auth/signup`;
 
-  const existentEmailAcc = {
-    email: 'dzabalamacheza@gmail.com',
-    password: 'Runfree8',
-    first_name: 'Cheza',
-    last_name: 'Dzabala',
-  };
-
-  const validAcc = {
-    email: 'demo@myacc.com',
-    password: 'Runfree8',
-    first_name: 'Cheza',
-    last_name: 'Dzabala',
-  };
-
-  const missingEmail = {
-    password: 'Runfree8',
-    first_name: 'Cheza',
-    last_name: 'Dzabala',
-  };
-
-
-  const missingPassword = {
-    email: 'dzabalamacheza@myacc.com',
-    first_name: 'Cheza',
-    last_name: 'Dzabala',
-  };
-
-  const missingFirstName = {
-    email: 'dzabalamacheza1@myacc.com',
-    password: 'Runfree8',
-    last_name: 'Dzabala',
-  };
-
-  const missingLastName = {
-    email: 'dzabalamacheza2@myacc.com',
-    password: 'Runfree8',
-    first_name: 'Cheza',
-  };
-
-  const lastNameSpecialCharacters = {
-    email: 'user@myguy.com',
-    password: 'Hello22',
-    first_name: 'User',
-    last_name: 'foo-baz',
-  };
-
-  const firstNameSpecialCharacters = {
-    email: 'user@myguy.com',
-    password: 'Hello4',
-    first_name: 'MYGUY@',
-    last_name: 'foobaz',
-  };
-
-  const nonAlphaPassword = {
-    email: 'user@myguy.com',
-    password: 'Hello',
-    first_name: 'MYGUY',
-    last_name: 'foobaz',
-  };
-
-
   it('Hit the sign in endpoints', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(existentEmailAcc)
+      .send(users.existentEmailAcc)
       .end((err, res) => {
         expect(res.status).to.not.equal(404, 'route does not exist');
         done();
@@ -86,7 +26,7 @@ describe('Sign Up Feature', () => {
   it('Should Successfully Create A New User Account, Provided Valid Data', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(validAcc)
+      .send(users.validAcc)
       .end((err, res) => {
         const { body } = res;
         expect(res.status).to.be.equal(201, 'Incorrect Status Code Being Returned');
@@ -101,7 +41,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if Email already exists', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(existentEmailAcc)
+      .send(users.existentEmailAcc)
       .end((err, res) => {
         const { body } = res;
         expect(res.status).to.be.equal(409, 'Incorrect Status Code Being Returned');
@@ -114,7 +54,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if Email is not provided', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(missingEmail)
+      .send(users.missingEmail)
       .end((err, res) => {
         const { body } = res;
         expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
@@ -127,7 +67,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if Password is not provided', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(missingPassword)
+      .send(users.missingPassword)
       .end((err, res) => {
         const { body } = res;
         expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
@@ -140,7 +80,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if First Name is not provided', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(missingFirstName)
+      .send(users.missingFirstName)
       .end((err, res) => {
         const { body } = res;
         expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
@@ -153,7 +93,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if Last Name is not provided', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(missingLastName)
+      .send(users.missingLastName)
       .end((err, res) => {
         const { body } = res;
         expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
@@ -166,7 +106,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if First Name has special characters provided', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(firstNameSpecialCharacters)
+      .send(users.firstNameSpecialCharacters)
       .end((err, res) => {
         const { body } = res;
         expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
@@ -180,7 +120,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if Last Name has special characters provided', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(lastNameSpecialCharacters)
+      .send(users.lastNameSpecialCharacters)
       .end((err, res) => {
         const { body } = res;
         expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
@@ -193,7 +133,7 @@ describe('Sign Up Feature', () => {
   it('Should Reject A New User account if password is not alphanumeric', (done) => {
     chai.request(app)
       .post(endpoint)
-      .send(nonAlphaPassword)
+      .send(users.nonAlphaPassword)
       .end((err, res) => {
         const { body } = res;
         expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');

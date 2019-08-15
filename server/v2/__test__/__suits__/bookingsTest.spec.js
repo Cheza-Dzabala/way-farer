@@ -1,4 +1,6 @@
 import app from '../../app';
+import users from '../__test_data__/users';
+import bookings from '../__test_data__/bookings';
 
 const version = '/api/v2/';
 const chai = require('chai');
@@ -8,42 +10,17 @@ process.env.NODE_ENV = 'test';
 const { expect } = chai;
 chai.use(chaiHttp);
 
-
-const validBooking = {
-  trip_id: 1,
-  seat_number: '3',
-};
-
-const validBooking2 = {
-  trip_id: 1,
-  seat_number: '3',
-};
-
-
-const notTripId = {
-  seat_number: '3a',
-};
-
-
-const noSeatNumber = {
-  trip_id: 1,
-};
 const endpoint = `${version}bookings`;
-
-const validAcc = {
-  email: 'dzabalamacheza@gmail.com',
-  password: 'Runfree8418_!*',
-};
-
 describe('Booking Tests', () => {
   let token = false;
   before((done) => {
     chai.request(app)
       .post(`${version}auth/signin`)
-      .send(validAcc)
+      .send(users.admin)
       .end((err, res) => {
         const { body } = res;
-        token = body.data.token;
+        const collectedToken = body.data.token;
+        token = collectedToken;
         expect(body.data.token);
         done();
       });
@@ -53,7 +30,7 @@ describe('Booking Tests', () => {
       chai.request(app)
         .post(endpoint)
         .set('token', `bearer ${token}`)
-        .send(validBooking2)
+        .send(bookings.validBooking2)
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(201);
@@ -72,7 +49,7 @@ describe('Booking Tests', () => {
       chai.request(app)
         .post(endpoint)
         .set('token', `bearer ${token}`)
-        .send(validBooking2)
+        .send(bookings.validBooking2)
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(409);
@@ -87,7 +64,7 @@ describe('Booking Tests', () => {
     it('Should reject request if token is not present in header', (done) => {
       chai.request(app)
         .post(endpoint)
-        .send(validBooking)
+        .send(bookings.validBooking)
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(401, 'Wrong Status being returned');
@@ -102,7 +79,7 @@ describe('Booking Tests', () => {
       chai.request(app)
         .post(endpoint)
         .set('token', `bearer ${token}`)
-        .send(notTripId)
+        .send(bookings.notTripId)
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(400);
@@ -116,7 +93,7 @@ describe('Booking Tests', () => {
       chai.request(app)
         .post(endpoint)
         .set('token', `bearer ${token}`)
-        .send(noSeatNumber)
+        .send(bookings.noSeatNumber)
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(400);
@@ -135,7 +112,6 @@ describe('Booking Tests', () => {
         .set('token', `bearer ${token}`)
         .end((err, res) => {
           const { status, body } = res;
-          console.log(body);
           expect(status).to.be.equal(200, 'User not being returned with appropriate status codes');
           expect(body).to.have.property('data');
           expect(body.data).to.be.a('array', 'wrong data type being returned');
@@ -150,7 +126,6 @@ describe('Booking Tests', () => {
         .set('token', `bearer ${token}`)
         .end((err, res) => {
           const { body } = res;
-          console.log(body);
           expect(res.status).to.be.equal(200, 'Incorrect Status being returned');
           expect(body.status).to.be.equal('success', 'Incorrect body status being returned');
           expect(body.data.message).to.be.equal('Successfully deleted booking', 'Incorrect booking being returned');
