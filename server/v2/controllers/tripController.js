@@ -5,8 +5,8 @@ import queries from '../helpers/queries';
 
 async function createTrip(req, res) {
   const trip = await tripModel.create(req);
-  if (trip) return Response(res, 201, 'success', trip);
-  return Response(res, 500, 'error', { message: 'Internal Server Error' });
+  if (trip) return Response(res, 201, 'Trip successfully created', trip);
+  return Response(res, 500, { error: 'Internal Server Error' }, { });
 }
 
 async function allTrips(req, res) {
@@ -16,17 +16,17 @@ async function allTrips(req, res) {
 
 async function getTrip(id, res) {
   const trip = await fetchHelper(queries.trips.selectOneTrip, [id]);
-  if (trip) return Response(res, 200, 'success', trip);
-  return Response(res, 404, 'unsuccessful', { message: 'Trip not found' });
+  if (trip) return Response(res, 200, `${trip.origin} to ${trip.destination}`, trip);
+  return Response(res, 404, 'Trip not found', { });
 }
 async function cancelTrip(id, res) {
   const trip = await fetchHelper(queries.trips.selectOneTrip, [id]);
-  if (!trip) return Response(res, 400, 'unsuccessful', { message: 'Trip does not exist' });
-  if (!trip.status) return Response(res, 409, 'unsuccessful', { message: 'Trip already cancelled' });
+  if (!trip) return Response(res, 400, 'Trip does not exist', { });
+  if (!trip.status) return Response(res, 409, 'Trip already cancelled', { });
   const { status } = await tripModel.cancel(trip);
-  if (status !== 'error') return Response(res, 200, 'success', { message: 'Trip cancelled successfully' });
+  if (status !== 'error') return Response(res, 200, 'Trip cancelled successfully', { });
 
-  return Response(res, 500, 'unsuccessful', { message: 'something went wrong on the server' });
+  return Response(res, 500, 'Something went wrong on the server', { });
 }
 module.exports = {
   createTrip, allTrips, cancelTrip, getTrip,

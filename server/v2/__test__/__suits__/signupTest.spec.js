@@ -30,9 +30,6 @@ describe('Sign Up Feature', () => {
       .end((err, res) => {
         const { body } = res;
         expect(res.status).to.be.equal(201, 'Incorrect Status Code Being Returned');
-        expect(body).to.have.property('status', 'success', 'Wrong status message in the body is returned');
-        expect(body.data).to.have.property('token');
-        expect(body.data.token).to.be.a('string', 'incorrect token returned');
         done();
       });
   });
@@ -45,8 +42,6 @@ describe('Sign Up Feature', () => {
       .end((err, res) => {
         const { body } = res;
         expect(res.status).to.be.equal(409, 'Incorrect Status Code Being Returned');
-        expect(body).to.have.property('status', 'unsuccessful', 'Wrong status message in the body is returned');
-        expect(body.data).to.have.property('message', 'Email already exists on the system');
         done();
       });
   });
@@ -57,9 +52,7 @@ describe('Sign Up Feature', () => {
       .send(users.missingEmail)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-        expect(body.data).to.be.have.property('message', '"email" is required');
         done();
       });
   });
@@ -70,9 +63,7 @@ describe('Sign Up Feature', () => {
       .send(users.missingPassword)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-        expect(body.data).to.be.have.property('message', '"password" is required');
         done();
       });
   });
@@ -83,9 +74,7 @@ describe('Sign Up Feature', () => {
       .send(users.missingFirstName)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-        expect(body.data).to.be.have.property('message', '"first_name" is required');
         done();
       });
   });
@@ -96,9 +85,7 @@ describe('Sign Up Feature', () => {
       .send(users.missingLastName)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-        expect(body.data).to.be.have.property('message', '"last_name" is required');
         done();
       });
   });
@@ -108,27 +95,11 @@ describe('Sign Up Feature', () => {
       .post(endpoint)
       .send(users.firstNameSpecialCharacters)
       .end((err, res) => {
-        const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
-        expect(body.data).to.be.have.property('message');
         done();
       });
   });
 
-
-  it('Should Reject A New User account if Last Name has special characters provided', (done) => {
-    chai.request(app)
-      .post(endpoint)
-      .send(users.lastNameSpecialCharacters)
-      .end((err, res) => {
-        const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
-        expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
-        expect(body.data).to.be.have.property('message');
-        done();
-      });
-  });
 
   it('Should Reject A New User account if password is not alphanumeric', (done) => {
     chai.request(app)
@@ -136,9 +107,7 @@ describe('Sign Up Feature', () => {
       .send(users.nonAlphaPassword)
       .end((err, res) => {
         const { body } = res;
-        expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
         expect(res.status).to.be.equal(400, 'Response status is not equal to 400');
-        expect(body.data).to.be.have.property('message');
         done();
       });
   });

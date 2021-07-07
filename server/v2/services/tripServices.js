@@ -5,7 +5,7 @@ async function create({
   origin, destination, fare, seating_capacity, trip_date, bus_license_number,
 }) {
   const queryText = queries.trips.insertTrip;
-  const values = [true, origin, destination, fare, seating_capacity, trip_date, bus_license_number];
+  const values = [true, origin, destination, fare, seating_capacity, seating_capacity, trip_date, bus_license_number];
   try {
     const { rows } = await query(queryText, values);
     return rows[0];

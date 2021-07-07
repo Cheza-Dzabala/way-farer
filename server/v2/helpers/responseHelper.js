@@ -1,4 +1,5 @@
 export default (res, status, bodyStatus, data) => res.status(status).json({
-  status: bodyStatus,
+  status,
+  message: bodyStatus,
   data,
 });

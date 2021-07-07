@@ -5,7 +5,7 @@ import tripsModel from '../models/tripsModel';
 const validateBooking = (data) => {
   const schema = Joi.object().keys({
     trip_id: Joi.number().required(),
-    seat_number: Joi.string().required(),
+    number_of_seats: Joi.string().regex(/^[0-9]+$/).required(),
   });
 
   return Joi.validate(data, schema);

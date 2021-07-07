@@ -2,12 +2,13 @@ import dbServices from '../services/tripServices';
 
 class Trips {
   constructor({
-    id, status, origin, destination, fare, seating_capacity, trip_date, bus_license_number,
+    id, status, origin, destination, fare, seating_capacity, available_seats, trip_date, bus_license_number,
   }) {
     this.id = id;
     this.fare = fare;
     this.destination = destination;
     this.seating_capacity = seating_capacity;
+    this.available_seats = available_seats;
     this.origin = origin;
     this.trip_date = trip_date;
     this.status = status;

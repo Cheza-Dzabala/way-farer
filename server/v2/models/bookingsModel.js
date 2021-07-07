@@ -4,22 +4,24 @@ import dbService from '../services/bookingsServices';
 
 class Bookings {
   constructor({
-    id, trip_id, user_id, created_on, seat_number,
+    id, trip_id, user_id, created_on, number_of_seats,
   }) {
     this.id = id;
     this.trip_id = trip_id;
     this.user_id = user_id;
     this.created_on = created_on;
-    this.seat_number = seat_number;
+    this.number_of_seats = number_of_seats;
   }
+
 
   async bookingModel() {
     const user = await fetchHelper(queries.users.selectById, [this.user_id]);
     const trip = await fetchHelper(queries.trips.selectOneTrip, [this.trip_id]);
+    await fetchHelper(queries.trips.modifySeats, [(trip.available_seats - parseInt(this.number_of_seats)), trip.id]);
     return {
       booking_id: this.id,
       trip_id: trip.id,
-      allocated_seat: this.seat_number,
+      allocated_seats: parseInt(this.number_of_seats),
       bus_license_number: trip.bus_license_number,
       trip_date: trip.trip_date,
       first_name: user.first_name,
@@ -28,6 +30,8 @@ class Bookings {
     };
   }
 }
+
+
 async function allBookings() {
   const bookings = await dbService.all();
   const payload = [];
@@ -57,6 +61,7 @@ async function userBookings(id) {
 }
 
 async function createBooking(data) {
+  console.log(data);
   const obj = await dbService.create(data);
   const booking = new Bookings(obj);
   const payload = await booking.bookingModel();
@@ -65,7 +70,9 @@ async function createBooking(data) {
 
 async function deleteBooking(booking) {
   try {
-    await dbService.deleteBooking(booking);
+    await dbService.deleteBooking(booking.id);
+    const trip = await fetchHelper(queries.trips.selectOneTrip, [booking.trip_id]);
+    await fetchHelper(queries.trips.modifySeats, [(parseInt(trip.available_seats) + parseInt(booking.number_of_seats)), trip.id]);
     return {
       status: 'success',
       details: 'Successfully deleted booking',

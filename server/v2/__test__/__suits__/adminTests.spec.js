@@ -44,8 +44,6 @@ describe('Admin Routes', () => {
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(200, 'Wrong status being returned');
-          expect(body.status).to.be.equal('success', 'Success not being returned');
-          expect(body.data).to.be.an('array', 'Array not being returned');
           done();
         });
     });
@@ -58,7 +56,6 @@ describe('Admin Routes', () => {
         .end((err, res) => {
           const { body, status } = res;
           expect(status).to.be.equal(201, 'Incorrect Status Code Being Returned');
-          expect(body).to.have.property('status', 'success', 'Wrong status message in the body is returned');
           done();
         });
     });
@@ -71,8 +68,6 @@ describe('Admin Routes', () => {
         .end((err, res) => {
           const { body } = res;
           expect(res.status).to.be.equal(409, 'Incorrect Status Code Being Returned');
-          expect(body).to.have.property('status', 'unsuccessful', 'Wrong status message in the body is returned');
-          expect(body.data).to.have.property('message', 'Email already exists on the system');
           done();
         });
     });
@@ -84,9 +79,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-          expect(body.data).to.be.have.property('message', '"email" is required');
           done();
         });
     });
@@ -98,9 +91,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-          expect(body.data).to.be.have.property('message', '"password" is required');
           done();
         });
     });
@@ -112,9 +103,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-          expect(body.data).to.be.have.property('message', '"first_name" is required');
           done();
         });
     });
@@ -125,9 +114,7 @@ describe('Admin Routes', () => {
         .set('token', token)
         .end((err, res) => {
           const { body } = res;
-          expect(body).to.have.property('status', 'unsuccessful', 'Bad Request status not returned');
           expect(res.status).to.be.equal(400, 'Response status is not equal to 404');
-          expect(body.data).to.be.have.property('message', '"last_name" is required');
           done();
         });
     });
@@ -144,10 +131,6 @@ describe('Log In: with non admin', () => {
         const { body } = res;
         badToken = `bearer ${body.data.token}`;
         expect(res.status).to.be.equal(200, 'Incorrect Status Code Being Returned');
-        expect(body).to.have.property('status', 'success', 'Wrong status message in the body is returned');
-        expect(body).to.have.property('data');
-        expect(body.data).to.have.property('token');
-        expect(body.data.token).to.be.a('string', 'incorrect token returned');
         done();
       });
   });
@@ -158,9 +141,6 @@ describe('Log In: with non admin', () => {
       .end((err, res) => {
         const { status, body } = res;
         expect(status).to.be.equal(403, 'User not being returned with appropriate status codes');
-        expect(body).to.have.property('data');
-        expect(body.data.message).to.be.equal('Only admins can access this section', 'wrong message being returned to the user');
-        expect(body.status).to.be.equal('Unauthorized', 'Wrong body status being presented to the user');
         done();
       });
   });

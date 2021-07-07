@@ -13,7 +13,7 @@ router.use('/auth', authRoutes);
 router.use('/trips', tripRoutes);
 router.use('/bookings', bookingRoutes);
 router.use('/admins', adminRoutes);
-router.use('docs', swaggerUi.serve, swaggerUi.setup(specs));
+router.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 router.use('*', (req, res) => Response(res, 404, 'unsuccessful', 'Route Does Not Exist'));
 
 module.exports = router;
