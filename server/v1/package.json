@@ -8,7 +8,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/register": "^7.5.5",
     "@babel/runtime": "^7.5.5",
-    "@hapi/joi": "^15.1.0",
+    "@hapi/joi": "^15.1.1",
     "babel-preset-airbnb": "^4.0.1",
     "babel-runtime": "^6.26.0",
     "babel-watch": "^7.0.0",
